@@ -1,3 +1,3 @@
 # DSTR-Project
-- Singly Linked Lists (Zheng and Winston)
-- Array (Sabrina and Mark)
+- Array (Zheng and Winston)
+- Singly Linked Lists (Sabrina and Mark)
