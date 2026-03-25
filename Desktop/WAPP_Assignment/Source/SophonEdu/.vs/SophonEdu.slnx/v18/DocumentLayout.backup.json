@@ -3,7 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Desktop\\WAPP_Assignment\\Source\\SophonEdu\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{2822338B-B825-4085-BFE0-1B7AF8398414}|SophonEdu\\SophonEdu.csproj|c:\\users\\user\\desktop\\wapp_assignment\\source\\sophonedu\\sophonedu\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
+      "AbsoluteMoniker": "D:0:0:{2822338B-B825-4085-BFE0-1B7AF8398414}|SophonEdu\\SophonEdu.csproj|c:\\users\\user\\desktop\\wapp_assignment\\source\\sophonedu\\sophonedu\\register.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{2822338B-B825-4085-BFE0-1B7AF8398414}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\register.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2822338B-B825-4085-BFE0-1B7AF8398414}|SophonEdu\\SophonEdu.csproj|C:\\Users\\User\\Desktop\\WAPP_Assignment\\Source\\SophonEdu\\sophonedu\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}",
       "RelativeMoniker": "D:0:0:{2822338B-B825-4085-BFE0-1B7AF8398414}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\site.master||{B30AFBFF-D992-43B7-B62D-2642580A2883}"
     }
   ],
@@ -19,6 +23,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Register.aspx",
+              "DocumentMoniker": "C:\\Users\\User\\Desktop\\WAPP_Assignment\\Source\\SophonEdu\\SophonEdu\\Register.aspx",
+              "RelativeDocumentMoniker": "SophonEdu\\Register.aspx",
+              "ToolTip": "C:\\Users\\User\\Desktop\\WAPP_Assignment\\Source\\SophonEdu\\SophonEdu\\Register.aspx",
+              "RelativeToolTip": "SophonEdu\\Register.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-03-25T09:54:49.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Site.Master",
               "DocumentMoniker": "C:\\Users\\User\\Desktop\\WAPP_Assignment\\Source\\SophonEdu\\SophonEdu\\Site.Master",
               "RelativeDocumentMoniker": "SophonEdu\\Site.Master",

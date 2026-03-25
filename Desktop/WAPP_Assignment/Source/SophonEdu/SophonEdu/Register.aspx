@@ -19,6 +19,7 @@
             <asp:ListItem>Male</asp:ListItem>
             <asp:ListItem>Female</asp:ListItem>
         </asp:DropDownList>
+    <br />
     <p>
         Level of Study</p>
         <asp:DropDownList ID="DropDownList2" runat="server">
