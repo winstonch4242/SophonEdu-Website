@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[LearnersData] (
+CREATE TABLE [dbo].[LearnersData] (
     [LearnerID]    INT              IDENTITY (1, 1) NOT NULL,
     [FirstName]    NVARCHAR (50)    NOT NULL,
     [LastName]     NVARCHAR (50)    NOT NULL,
@@ -24,7 +24,16 @@ CREATE TABLE [dbo].[LecturersData] (
     PRIMARY KEY CLUSTERED ([LecturerID] ASC)
 );
 
-
+CREATE TABLE [dbo].[AdminData] (
+    [AdminID]      INT              IDENTITY (1, 1) NOT NULL,
+    [FirstName]    NVARCHAR (50)    NOT NULL,
+    [LastName]     NVARCHAR (50)    NOT NULL,
+    [Age]          INT              NOT NULL,
+    [EmailAddress] NVARCHAR (100)   NOT NULL,
+    [Username]     NVARCHAR (50)    NOT NULL,
+    [Password]     NVARCHAR (50)    NOT NULL,
+    PRIMARY KEY CLUSTERED ([AdminID] ASC)
+);
 
 INSERT INTO [LearnersData] (FirstName, LastName, Age, Gender, LevelOfStudy, EmailAddress, Username, Password)
 VALUES
@@ -35,14 +44,15 @@ VALUES
 
 SELECT * FROM [LearnersData];
 
-INSERT INTO [LecturersData] (FirstName, LastName, Age, Gender, AcademicRole, EmailAddress, Username, Password)
+INSERT INTO [AdminData] (FirstName, LastName, Age, EmailAddress, Username, Password)
 VALUES
-('Nurul', 'Hadi', 42, 'Female', 'Senior Lecturer', 'nurul.hadi@yahoo.com', 'nurulh42', 'B$8vL1*zR5@Xp'),
-('Jason', 'Tan', 38, 'Male', 'Mentor', 'jason.tan@outlook.com', 'jasont38', 'M!4qZ7&cY9#Hs'),
-('Siti', 'Zainab', 45, 'Female', 'Programme Leader', 'siti.zainab@gmail.com', 'sitiz45', 'K@2nF6^pT8!Wd'),
-('Wei Hang', 'Lim', 33, 'Male', 'Lecturer', 'daniel.lee@yahoo.com', 'weihlim03', 'R9!xU3#mQ7@Az');
+('Liyana', 'Aziz', 26, 'liyana.aziz@gmail.com', 'liyaz26', 'La31tx8(g@1'),
+('Marcus', 'Lee', 31, 'marcus.lee@hotmail.com', 'mlee31', 'Jl53a.S0=&k5'),
+('Nurul', 'Farid', 24, 'nurul.farid@yahoo.com', 'nfarid24', '9nZ)N£q39uF'),
+('Ethan', 'Wong', 29, 'ethan.wong@outlookcom', 'ewong29', '>f\A^rQ2<]31'),
+('Hafiz', 'Zulkifli', 35, 'hafiz.zulkifli@proton.me', 'hzulkifli35', '4s6Y88X}]#([');
 
-SELECT * FROM [LecturersData];
+SELECT * FROM [AdminData];
 
 ALTER TABLE LearnersData ADD Salt UNIQUEIDENTIFIER DEFAULT NEWID();
 UPDATE LearnersData SET Salt = NEWID();
@@ -51,9 +61,6 @@ UPDATE LearnersData SET PasswordHash = HASHBYTES('SHA2_512', Password + CAST(Sal
 DECLARE @Password NVARCHAR(50) = 'n3SOJ9A46ZmrVTCf';
 SELECT * FROM LearnersData WHERE PasswordHash = HASHBYTES('SHA2_512', @Password + CAST(Salt AS NVARCHAR(36)));
 
-ALTER TABLE LecturersData ADD Salt UNIQUEIDENTIFIER DEFAULT NEWID();
-UPDATE LecturersData SET Salt = NEWID();
-ALTER TABLE LecturersData ADD PasswordHash VARBINARY(64);
-UPDATE LecturersData SET PasswordHash = HASHBYTES('SHA2_512', Password + CAST(Salt AS NVARCHAR(36))) WHERE PasswordHash IS NULL;
-DECLARE @Password NVARCHAR(50) = 'B$8vL1*zR5@Xp';
-SELECT * FROM LecturersData WHERE PasswordHash = HASHBYTES('SHA2_512', @Password + CAST(Salt AS NVARCHAR(36)));
+UPDATE AdminData SET Salt = NEWID();
+ALTER TABLE AdminData ADD PasswordHash VARBINARY(64);
+UPDATE AdminData SET PasswordHash = HASHBYTES('SHA2_512', Password + CAST(Salt AS NVARCHAR(36))) WHERE PasswordHash IS NULL;
