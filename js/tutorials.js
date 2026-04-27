@@ -1,4 +1,4 @@
-// Tutorial Data
+﻿// Tutorial Data
 const tutorialsData = [
     {
         id: 1,
@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEventListeners() {
     // Mobile menu
     document.getElementById('hamburger')?.addEventListener('click', toggleMobileMenu);
-    
+
     // Category tabs
     document.querySelectorAll('.category-tab').forEach(tab => {
         tab.addEventListener('click', (e) => {
@@ -318,13 +318,13 @@ function setupEventListeners() {
             filterTutorials(e.target.dataset.category);
         });
     });
-    
+
     // Tutorial navigation
     document.getElementById('prevStepBtn')?.addEventListener('click', previousStep);
     document.getElementById('nextStepBtn')?.addEventListener('click', nextStep);
     document.getElementById('resetCodeBtn')?.addEventListener('click', resetCode);
     document.getElementById('runCodeBtn')?.addEventListener('click', runCode);
-    
+
     // Output tabs
     document.querySelectorAll('.output-tab').forEach(tab => {
         tab.addEventListener('click', (e) => {
@@ -335,12 +335,12 @@ function setupEventListeners() {
             document.getElementById(outputType === 'preview' ? 'previewFrame' : 'consoleOutput')?.classList.add('active');
         });
     });
-    
+
     // Modal close
     document.getElementById('closeTutorial')?.addEventListener('click', () => {
         closeModal('tutorialModal');
     });
-    
+
     // Scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
@@ -355,12 +355,12 @@ function setupEventListeners() {
 function renderTutorials() {
     const grid = document.getElementById('tutorialsGrid');
     if (!grid) return;
-    
+
     if (filteredTutorials.length === 0) {
         grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gray);">No tutorials found.</p>';
         return;
     }
-    
+
     grid.innerHTML = filteredTutorials.map(tutorial => `
         <div class="tutorial-item" onclick="startTutorial(${tutorial.id})">
             <div class="tutorial-preview-section">
@@ -398,7 +398,7 @@ function filterTutorials(category) {
 function startTutorial(tutorialId) {
     currentTutorial = tutorialsData.find(t => t.id === tutorialId);
     if (!currentTutorial) return;
-    
+
     currentStep = 0;
     document.getElementById('tutorialTitle').textContent = currentTutorial.title;
     loadStep();
@@ -479,13 +479,13 @@ function resetCode() {
 function runCode() {
     const code = document.getElementById('codeEditor').value;
     const previewFrame = document.getElementById('previewFrame');
-    
+
     try {
         const doc = previewFrame.contentDocument || previewFrame.contentWindow.document;
         doc.open();
         doc.write(code);
         doc.close();
-        
+
         logToConsole('Code executed successfully!', 'success');
     } catch (error) {
         logToConsole(`Error: ${error.message}`, 'error');

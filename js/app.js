@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
     setupEventListeners();
     loadFromLocalStorage();
-    
+
     // Check if user should be redirected to dashboard
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
@@ -178,7 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // If on index page and logged in, check for hash navigation
         if (window.location.hash === '#admin' && user.role === 'admin') {
             switchView('admin');
-        } else if (user.role === 'member' && window.location.pathname.includes('index.html')) {
+        } else if (user.role === 'member' && window.location.pathname.includes('index.aspx')) {
             // Don't auto-redirect, let them browse
         }
     }
@@ -203,7 +203,7 @@ function initializeApp() {
 function setupEventListeners() {
     // Navigation
     document.getElementById('hamburger')?.addEventListener('click', toggleMobileMenu);
-    
+
     // Smooth scroll for internal links only (starting with #)
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -216,7 +216,7 @@ function setupEventListeners() {
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             }
-            // For regular links (courses.html, etc.), let them navigate normally
+            // For regular links (courses.aspx, etc.), let them navigate normally
         });
     });
 
@@ -235,14 +235,14 @@ function setupEventListeners() {
     // Forms
     document.getElementById('registrationForm')?.addEventListener('submit', handleRegistration);
     document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
-    
+
     // Logout
     document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
     document.getElementById('adminLogoutBtn')?.addEventListener('click', handleLogout);
-    
+
     // Profile button
     document.getElementById('profileBtn')?.addEventListener('click', () => {
-        window.location.href = 'pages/profile.html';
+        window.location.href = 'pages/profile.aspx';
     });
 
     // Modals
@@ -316,7 +316,7 @@ function switchView(view) {
     document.querySelectorAll('.view-section').forEach(section => {
         section.classList.remove('active');
     });
-    
+
     if (view === 'guest') {
         document.getElementById('guestView')?.classList.add('active');
         document.querySelector('.nav-actions').style.display = 'flex';
@@ -329,41 +329,41 @@ function switchView(view) {
         document.querySelector('.nav-actions').style.display = 'none';
         renderAdminPanel();
     }
-    
+
     window.scrollTo(0, 0);
 }
 
 // Authentication
 function handleRegistration(e) {
     e.preventDefault();
-    
+
     const name = document.getElementById('regName').value.trim();
     const email = document.getElementById('regEmail').value.trim();
     const password = document.getElementById('regPassword').value;
     const confirmPassword = document.getElementById('regConfirmPassword').value;
     const learningPath = document.querySelector('input[name="learningPath"]:checked')?.value;
-    
+
     // Validation
     if (!name || !email || !password || !confirmPassword || !learningPath) {
         showToast('Please fill in all fields and select a learning path', 'error');
         return;
     }
-    
+
     if (!validateEmail(email)) {
         showToast('Please enter a valid email', 'error');
         return;
     }
-    
+
     if (password.length < 6) {
         showToast('Password must be at least 6 characters', 'error');
         return;
     }
-    
+
     if (password !== confirmPassword) {
         showToast('Passwords do not match', 'error');
         return;
     }
-    
+
     // Create user
     const user = {
         id: Date.now(),
@@ -387,10 +387,10 @@ function handleRegistration(e) {
 
 function handleLogin(e) {
     e.preventDefault();
-    
+
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value;
-    
+
     // Demo login logic
     if (email === 'admin@sophonedu.com' && password === 'admin123') {
         state.currentUser = {
@@ -436,19 +436,19 @@ function handleLogout() {
 // Member Dashboard
 function renderMemberDashboard() {
     if (!state.currentUser) return;
-    
+
     // Update welcome message
     document.getElementById('memberName').textContent = state.currentUser.name;
-    
+
     // Update stats
     const progress = state.currentUser.progress || 0;
     const xp = state.currentUser.xp || 0;
     const badgeCount = state.currentUser.badges?.length || 0;
-    
+
     document.getElementById('completionRate').textContent = `${progress}%`;
     document.getElementById('experiencePoints').textContent = `${xp} XP`;
     document.getElementById('badgeCount').textContent = badgeCount;
-    
+
     // Update progress bar
     const progressFill = document.getElementById('progressFill');
     const progressText = document.getElementById('progressText');
@@ -456,10 +456,10 @@ function renderMemberDashboard() {
         progressFill.style.width = `${progress}%`;
         progressText.textContent = `${progress}%`;
     }, 300);
-    
+
     // Render badges
     renderBadges();
-    
+
     // Render lessons
     renderLessons();
 }
@@ -467,9 +467,9 @@ function renderMemberDashboard() {
 function renderBadges() {
     const badgeGrid = document.getElementById('badgeGrid');
     if (!badgeGrid) return;
-    
+
     const userBadges = state.currentUser?.badges || [];
-    
+
     badgeGrid.innerHTML = state.badges.map(badge => {
         const unlocked = userBadges.includes(badge.id);
         return `
@@ -484,11 +484,11 @@ function renderBadges() {
 function renderLessons(filter = 'all') {
     const lessonGrid = document.getElementById('lessonGrid');
     if (!lessonGrid) return;
-    
-    const filteredLessons = filter === 'all' 
-        ? state.lessons 
+
+    const filteredLessons = filter === 'all'
+        ? state.lessons
         : state.lessons.filter(l => l.level === filter);
-    
+
     lessonGrid.innerHTML = filteredLessons.map(lesson => `
         <div class="lesson-card" onclick="openLesson(${lesson.id})">
             <h4>${lesson.title}</h4>
@@ -511,24 +511,24 @@ function filterLessons(filter) {
 function openLesson(lessonId) {
     const lesson = state.lessons.find(l => l.id === lessonId);
     if (!lesson) return;
-    
+
     state.currentLesson = lesson;
-    
+
     document.getElementById('lessonTitle').textContent = lesson.title;
     document.getElementById('lessonNotes').innerHTML = `<p>${lesson.notes}</p>`;
     document.getElementById('lessonCode').innerHTML = `<pre>${lesson.code}</pre>`;
     document.getElementById('lessonExercises').innerHTML = `<p>${lesson.exercises}</p>`;
-    
+
     openModal('lessonModal');
 }
 
 // Quiz System
 function startQuiz() {
     if (!state.currentLesson || !state.currentLesson.quiz) return;
-    
+
     closeModal('lessonModal');
     state.quizAnswers = {};
-    
+
     const quizContent = document.getElementById('quizContent');
     quizContent.innerHTML = state.currentLesson.quiz.map((q, index) => {
         if (q.type === 'mcq') {
@@ -565,16 +565,16 @@ function startQuiz() {
             `;
         }
     }).join('');
-    
+
     openModal('quizModal');
 }
 
 function submitQuiz() {
     if (!state.currentLesson) return;
-    
+
     const quiz = state.currentLesson.quiz;
     let correct = 0;
-    
+
     quiz.forEach((q, index) => {
         const selected = document.querySelector(`input[name="q${index}"]:checked`);
         if (selected) {
@@ -584,19 +584,19 @@ function submitQuiz() {
             }
         }
     });
-    
+
     const score = Math.round((correct / quiz.length) * 100);
     const xpGained = correct * 50;
-    
+
     // Update user progress
     if (state.currentUser) {
         state.currentUser.xp = (state.currentUser.xp || 0) + xpGained;
         state.currentLesson.progress = Math.max(state.currentLesson.progress, score);
-        
+
         // Update overall progress
         const totalProgress = state.lessons.reduce((sum, l) => sum + l.progress, 0);
         state.currentUser.progress = Math.round(totalProgress / state.lessons.length);
-        
+
         // Unlock badges
         if (state.currentUser.xp >= 100 && !state.currentUser.badges.includes(1)) {
             state.currentUser.badges.push(1);
@@ -606,10 +606,10 @@ function submitQuiz() {
             state.currentUser.badges.push(6);
             showToast('⭐ Badge Unlocked: Perfectionist!', 'success');
         }
-        
+
         localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
     }
-    
+
     // Show results
     const quizContent = document.getElementById('quizContent');
     quizContent.innerHTML = `
@@ -620,9 +620,9 @@ function submitQuiz() {
             <p>+${xpGained} XP earned!</p>
         </div>
     `;
-    
+
     document.getElementById('submitQuizBtn').style.display = 'none';
-    
+
     setTimeout(() => {
         closeModal('quizModal');
         renderMemberDashboard();
@@ -640,7 +640,7 @@ function renderAdminPanel() {
 function switchAdminTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-    
+
     document.querySelector(`[data-tab="${tab}"]`)?.classList.add('active');
     document.getElementById(`${tab}Tab`)?.classList.add('active');
 }
@@ -686,7 +686,7 @@ function renderLessonsTable() {
 function renderStudentsTable() {
     const tbody = document.getElementById('studentsTableBody');
     if (!tbody) return;
-    
+
     tbody.innerHTML = state.students.map(student => `
         <tr>
             <td>${student.name}</td>
@@ -767,7 +767,7 @@ function openCrudModal(action, type, id = null) {
             </select>
         `;
     }
-    
+
     openModal('crudModal');
 }
 
@@ -810,7 +810,7 @@ function handleCrudSubmit(e) {
             status: 'active',
             progress: 0
         };
-        
+
         if (state.crudAction === 'add') {
             lessonData.id = Date.now();
             state.lessons.push(lessonData);
@@ -822,7 +822,7 @@ function handleCrudSubmit(e) {
                 showToast('Lesson updated successfully', 'success');
             }
         }
-        
+
         renderLessonsTable();
     } else {
         const studentData = {
@@ -831,7 +831,7 @@ function handleCrudSubmit(e) {
             level: document.getElementById('studentLevel').value,
             progress: 0
         };
-        
+
         if (state.crudAction === 'add') {
             studentData.id = Date.now();
             state.students.push(studentData);
@@ -843,10 +843,10 @@ function handleCrudSubmit(e) {
                 showToast('Student updated successfully', 'success');
             }
         }
-        
+
         renderStudentsTable();
     }
-    
+
     closeModal('crudModal');
 }
 
@@ -886,10 +886,10 @@ function closeModal(modalId) {
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
-    
+
     toastMessage.textContent = message;
     toast.className = `toast ${type} show`;
-    
+
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);

@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function checkAuth() {
     const currentUser = localStorage.getItem('currentUser');
     if (!currentUser) {
-        window.location.href = '../index.html';
+        window.location.href = '../index.aspx';
     }
 }
 
@@ -49,7 +49,7 @@ function loadUserData() {
         userData.level = user.level || userData.level;
         userData.xp = user.xp || userData.xp;
     }
-    
+
     // Update profile header
     document.getElementById('profileName').textContent = userData.name;
     document.getElementById('profileEmail').textContent = userData.email;
@@ -77,16 +77,16 @@ function loadUserData() {
 function setupEventListeners() {
     // Mobile menu
     document.getElementById('hamburger')?.addEventListener('click', toggleMobileMenu);
-    
+
     // Edit profile
     document.getElementById('editProfileBtn')?.addEventListener('click', openEditProfile);
     document.getElementById('closeEditProfile')?.addEventListener('click', () => closeModal('editProfileModal'));
     document.getElementById('cancelEdit')?.addEventListener('click', () => closeModal('editProfileModal'));
     document.getElementById('editProfileForm')?.addEventListener('submit', handleProfileUpdate);
-    
+
     // Logout
     document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
-    
+
     // Scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
@@ -101,7 +101,7 @@ function setupEventListeners() {
 function renderAchievements() {
     const list = document.getElementById('achievementList');
     if (!list) return;
-    
+
     list.innerHTML = userData.achievements.map(achievement => `
         <div class="achievement-item">
             <span class="achievement-icon">${achievement.icon}</span>
@@ -116,7 +116,7 @@ function renderAchievements() {
 function renderActivity() {
     const list = document.getElementById('activityList');
     if (!list) return;
-    
+
     list.innerHTML = userData.recentActivity.map(activity => `
         <div class="activity-item">
             <span class="activity-icon">${activity.icon}</span>
@@ -132,9 +132,9 @@ function renderActivity() {
 function renderCourses() {
     const grid = document.getElementById('enrolledCourses');
     if (!grid) return;
-    
+
     grid.innerHTML = userData.enrolledCourses.map(course => `
-        <div class="enrolled-course-card" onclick="window.location.href='courses.html'">
+        <div class="enrolled-course-card" onclick="window.location.href='courses.aspx'">
             <h4>${course.title}</h4>
             <div class="course-progress-bar">
                 <div class="course-progress-fill" style="width: ${course.progress}%"></div>
@@ -146,7 +146,7 @@ function renderCourses() {
 
 function animateProgressCircles() {
     const circles = document.querySelectorAll('.progress-circle');
-    
+
     circles.forEach(circle => {
         const progress = parseInt(circle.dataset.progress);
         const ring = circle.querySelector('.progress-ring');
@@ -201,7 +201,7 @@ function handleLogout() {
     localStorage.removeItem('currentUser');
     showToast('Logged out successfully', 'success');
     setTimeout(() => {
-        window.location.href = '../index.html';
+        window.location.href = '../index.aspx';
     }, 1000);
 }
 
@@ -216,10 +216,10 @@ function closeModal(modalId) {
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
-    
+
     toastMessage.textContent = message;
     toast.className = `toast ${type} show`;
-    
+
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);

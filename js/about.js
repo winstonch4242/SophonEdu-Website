@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEventListeners() {
     // Mobile menu
     document.getElementById('hamburger')?.addEventListener('click', toggleMobileMenu);
-    
+
     // CTA Register button
     document.getElementById('ctaRegisterBtn')?.addEventListener('click', () => {
-        window.location.href = '../index.html#register';
+        window.location.href = '../index.aspx#register';
     });
-    
+
     // Scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
@@ -26,7 +26,7 @@ function setupEventListeners() {
 
 function animateStats() {
     const statNumbers = document.querySelectorAll('.stat-number');
-    
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -36,7 +36,7 @@ function animateStats() {
             }
         });
     }, { threshold: 0.5 });
-    
+
     statNumbers.forEach(stat => observer.observe(stat));
 }
 
@@ -44,7 +44,7 @@ function animateValue(element, start, end, duration) {
     const range = end - start;
     const increment = range / (duration / 16);
     let current = start;
-    
+
     const timer = setInterval(() => {
         current += increment;
         if (current >= end) {

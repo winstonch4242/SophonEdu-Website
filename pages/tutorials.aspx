@@ -1,0 +1,125 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="tutorials.aspx.cs" Inherits="SophonEdu.pages.tutorials" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Tutorials - SophonEdu</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/tutorials.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="../index.aspx" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                    <img src="../images/logo.png" alt="SophonEdu" class="logo-image">
+                </a>
+            </div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.aspx" class="nav-link">Home</a></li>
+                <li><a href="courses.aspx" class="nav-link">Courses</a></li>
+                <li><a href="tutorials.aspx" class="nav-link">Tutorials</a></li>
+                <li><a href="about.aspx" class="nav-link">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="btn-secondary" id="loginBtn">Login</button>
+                <button class="btn-primary" id="registerBtn">Get Started</button>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="animate-fade-in">Interactive Tutorials</h1>
+            <p class="animate-fade-in-delay">Learn by doing with our hands-on coding tutorials</p>
+        </div>
+    </section>
+
+    <!-- Tutorial Categories -->
+    <section class="tutorial-categories">
+        <div class="container">
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all">All Tutorials</button>
+                <button class="category-tab" data-category="beginner">Beginner</button>
+                <button class="category-tab" data-category="intermediate">Intermediate</button>
+                <button class="category-tab" data-category="advanced">Advanced</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials Grid -->
+    <section class="tutorials-section">
+        <div class="container">
+            <div class="tutorials-grid" id="tutorialsGrid">
+                <!-- Tutorials populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Tutorial Modal -->
+    <div class="modal" id="tutorialModal">
+        <div class="modal-content tutorial-workspace">
+            <button class="modal-close" id="closeTutorial">&times;</button>
+            
+            <div class="tutorial-header">
+                <h2 id="tutorialTitle">Tutorial Title</h2>
+                <div class="tutorial-progress-bar">
+                    <div class="tutorial-progress-fill" id="tutorialProgress"></div>
+                </div>
+            </div>
+
+            <div class="tutorial-layout">
+                <div class="tutorial-instructions">
+                    <h3>Instructions</h3>
+                    <div id="tutorialInstructions">
+                        <!-- Instructions here -->
+                    </div>
+                    <div class="tutorial-navigation">
+                        <button class="btn-secondary" id="prevStepBtn" disabled>← Previous</button>
+                        <span id="stepIndicator">Step 1 of 5</span>
+                        <button class="btn-primary" id="nextStepBtn">Next →</button>
+                    </div>
+                </div>
+
+                <div class="tutorial-editor">
+                    <div class="editor-header">
+                        <span>Code Editor</span>
+                        <button class="btn-small" id="resetCodeBtn">Reset</button>
+                    </div>
+                    <textarea id="codeEditor" spellcheck="false"></textarea>
+                    <button class="btn-primary" id="runCodeBtn">▶ Run Code</button>
+                </div>
+
+                <div class="tutorial-output">
+                    <div class="output-tabs">
+                        <button class="output-tab active" data-output="preview">Preview</button>
+                        <button class="output-tab" data-output="console">Console</button>
+                    </div>
+                    <div class="output-content">
+                        <iframe id="previewFrame" class="output-panel active"></iframe>
+                        <div id="consoleOutput" class="output-panel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/tutorials.js"></script>
+</body>
+</html>
+

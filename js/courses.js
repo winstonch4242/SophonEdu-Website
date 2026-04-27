@@ -1,4 +1,4 @@
-// Course Data
+﻿// Course Data
 const coursesData = [
     {
         id: 1,
@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Clear the session storage
         sessionStorage.removeItem('selectedLevel');
     }
-    
+
     renderCourses();
     setupEventListeners();
 });
@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupEventListeners() {
     // Mobile menu
     document.getElementById('hamburger')?.addEventListener('click', toggleMobileMenu);
-    
+
     // Level filters
     document.querySelectorAll('.filter-tag').forEach(tag => {
         tag.addEventListener('click', (e) => {
@@ -320,21 +320,21 @@ function setupEventListeners() {
             filterCourses();
         });
     });
-    
+
     // Topic filter
     document.getElementById('topicFilter')?.addEventListener('change', filterCourses);
-    
+
     // Search
     document.getElementById('courseSearch')?.addEventListener('input', filterCourses);
-    
+
     // Modal close
     document.getElementById('closeCourseDetail')?.addEventListener('click', () => {
         closeModal('courseDetailModal');
     });
-    
+
     // Enroll button
     document.getElementById('enrollBtn')?.addEventListener('click', handleEnroll);
-    
+
     // Scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
@@ -349,12 +349,12 @@ function setupEventListeners() {
 function renderCourses() {
     const grid = document.getElementById('coursesGrid');
     if (!grid) return;
-    
+
     if (filteredCourses.length === 0) {
         grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; padding: 3rem; color: var(--gray);">No courses found matching your criteria.</p>';
         return;
     }
-    
+
     grid.innerHTML = filteredCourses.map(course => `
         <div class="course-item" onclick="showCourseDetail(${course.id})">
             <div class="course-thumbnail">
@@ -394,7 +394,7 @@ function filterCourses() {
 function showCourseDetail(courseId) {
     const course = coursesData.find(c => c.id === courseId);
     if (!course) return;
-    
+
     document.getElementById('detailLevel').textContent = course.level;
     document.getElementById('detailTitle').textContent = course.title;
     document.getElementById('detailDuration').textContent = course.duration;
@@ -422,7 +422,7 @@ function showCourseDetail(courseId) {
 function handleEnroll() {
     const courseId = document.getElementById('enrollBtn').dataset.courseId;
     const course = coursesData.find(c => c.id === parseInt(courseId));
-    
+
     // Check if user is logged in
     const currentUser = localStorage.getItem('currentUser');
     if (currentUser) {
@@ -430,12 +430,12 @@ function handleEnroll() {
         setTimeout(() => {
             // Check if we're in pages folder or root
             const isInPages = window.location.pathname.includes('/pages/');
-            window.location.href = isInPages ? 'profile.html' : 'pages/profile.html';
+            window.location.href = isInPages ? 'profile.aspx' : 'pages/profile.aspx';
         }, 1500);
     } else {
         showToast(`Please login or register to enroll in ${course.title}`, 'success');
         setTimeout(() => {
-            window.location.href = '../index.html#register';
+            window.location.href = '../index.aspx#register';
         }, 2000);
     }
 }
