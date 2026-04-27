@@ -269,8 +269,27 @@ const coursesData = [
 
 let filteredCourses = [...coursesData];
 
+// Load courses from localStorage if available (for admin updates)
+function loadCoursesFromStorage() {
+    const savedCourses = localStorage.getItem('courses');
+    if (savedCourses) {
+        const adminCourses = JSON.parse(savedCourses);
+        // Merge admin courses with default courses
+        adminCourses.forEach(adminCourse => {
+            const existingIndex = coursesData.findIndex(c => c.id === adminCourse.id);
+            if (existingIndex !== -1) {
+                coursesData[existingIndex] = adminCourse;
+            } else {
+                coursesData.push(adminCourse);
+            }
+        });
+        filteredCourses = [...coursesData];
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    loadCoursesFromStorage();
     // Check if a level was pre-selected from the home page
     const selectedLevel = sessionStorage.getItem('selectedLevel');
     if (selectedLevel) {

@@ -302,12 +302,40 @@
 
             <div class="container admin-content">
                 <div class="admin-tabs">
-                    <button class="tab-btn active" data-tab="lessons">Manage Lessons</button>
+                    <button class="tab-btn active" data-tab="courses">Manage Courses</button>
+                    <button class="tab-btn" data-tab="lessons">Manage Lessons</button>
                     <button class="tab-btn" data-tab="students">Manage Students</button>
                 </div>
 
+                <!-- Courses Management -->
+                <div class="tab-content active" id="coursesTab">
+                    <div class="crud-header">
+                        <h2>Courses Management</h2>
+                        <button class="btn-primary" id="addCourseBtn">+ Add New Course</button>
+                    </div>
+                    
+                    <div class="crud-table">
+                        <table id="coursesTable">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Level</th>
+                                    <th>Topic</th>
+                                    <th>Duration</th>
+                                    <th>Lessons</th>
+                                    <th>Students</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="coursesTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
                 <!-- Lessons Management -->
-                <div class="tab-content active" id="lessonsTab">
+                <div class="tab-content" id="lessonsTab">
                     <div class="crud-header">
                         <h2>Lessons Management</h2>
                         <button class="btn-primary" id="addLessonBtn">+ Add New Lesson</button>

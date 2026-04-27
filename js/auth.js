@@ -53,7 +53,7 @@ function goToDashboard() {
         const isInPages = window.location.pathname.includes('/pages/');
         
         if (user.role === 'admin') {
-            window.location.href = isInPages ? '../index.html#admin' : 'index.html#admin';
+            window.location.href = isInPages ? 'admin.html' : 'pages/admin.html';
         } else {
             window.location.href = isInPages ? 'profile.html' : 'pages/profile.html';
         }

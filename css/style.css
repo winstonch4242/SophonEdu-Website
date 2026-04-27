@@ -1087,6 +1087,31 @@ tbody tr:hover {
     transform: translateY(-2px);
 }
 
+/* Level Badges */
+.level-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.level-badge.foundation {
+    background: linear-gradient(135deg, #5bbcd8 0%, #aee1df 100%);
+    color: var(--dark);
+}
+
+.level-badge.diploma {
+    background: linear-gradient(135deg, #106fd1 0%, #227b9a 100%);
+    color: var(--white);
+}
+
+.level-badge.degree {
+    background: linear-gradient(135deg, #24ac71 0%, #227b9a 100%);
+    color: var(--white);
+}
+
 /* Modals */
 .modal {
     display: none;
