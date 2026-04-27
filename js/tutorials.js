@@ -407,30 +407,30 @@ function startTutorial(tutorialId) {
 
 function loadStep() {
     if (!currentTutorial) return;
-
+    
     const step = currentTutorial.steps[currentStep];
     const totalSteps = currentTutorial.steps.length;
-
+    
     // Update instructions
     document.getElementById('tutorialInstructions').innerHTML = `
         <p style="line-height: 1.8; color: var(--dark-light);">${step.instruction}</p>
         ${step.hint ? `<p style="margin-top: 1rem; padding: 1rem; background: var(--white); border-radius: 8px; color: var(--gray);"><strong>💡 Hint:</strong> ${step.hint}</p>` : ''}
     `;
-
+    
     // Update code editor
     document.getElementById('codeEditor').value = step.starterCode;
-
+    
     // Update step indicator
     document.getElementById('stepIndicator').textContent = `Step ${currentStep + 1} of ${totalSteps}`;
-
+    
     // Update navigation buttons
     document.getElementById('prevStepBtn').disabled = currentStep === 0;
     document.getElementById('nextStepBtn').textContent = currentStep === totalSteps - 1 ? 'Complete ✓' : 'Next →';
-
+    
     // Update progress bar
     const progress = ((currentStep + 1) / totalSteps) * 100;
     document.getElementById('tutorialProgress').style.width = `${progress}%`;
-
+    
     // Clear console
     document.getElementById('consoleOutput').innerHTML = '';
 }
@@ -444,14 +444,14 @@ function previousStep() {
 
 function nextStep() {
     if (!currentTutorial) return;
-
+    
     const step = currentTutorial.steps[currentStep];
     const userCode = document.getElementById('codeEditor').value.trim();
     const expectedCode = step.solution.trim();
-
+    
     // Simple validation (normalize whitespace)
     const normalizeCode = (code) => code.replace(/\s+/g, ' ').toLowerCase();
-
+    
     if (normalizeCode(userCode) === normalizeCode(expectedCode)) {
         if (currentStep < currentTutorial.steps.length - 1) {
             showToast('Great job! Moving to next step.', 'success');
@@ -512,10 +512,10 @@ function closeModal(modalId) {
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
-
+    
     toastMessage.textContent = message;
     toast.className = `toast ${type} show`;
-
+    
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);

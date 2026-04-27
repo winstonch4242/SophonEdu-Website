@@ -269,8 +269,27 @@ const coursesData = [
 
 let filteredCourses = [...coursesData];
 
+// Load courses from localStorage if available (for admin updates)
+function loadCoursesFromStorage() {
+    const savedCourses = localStorage.getItem('courses');
+    if (savedCourses) {
+        const adminCourses = JSON.parse(savedCourses);
+        // Merge admin courses with default courses
+        adminCourses.forEach(adminCourse => {
+            const existingIndex = coursesData.findIndex(c => c.id === adminCourse.id);
+            if (existingIndex !== -1) {
+                coursesData[existingIndex] = adminCourse;
+            } else {
+                coursesData.push(adminCourse);
+            }
+        });
+        filteredCourses = [...coursesData];
+    }
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
+    loadCoursesFromStorage();
     // Check if a level was pre-selected from the home page
     const selectedLevel = sessionStorage.getItem('selectedLevel');
     if (selectedLevel) {
@@ -359,16 +378,16 @@ function filterCourses() {
     const levelFilter = document.querySelector('.filter-tag.active')?.dataset.level || 'all';
     const topicFilter = document.getElementById('topicFilter')?.value || 'all';
     const searchQuery = document.getElementById('courseSearch')?.value.toLowerCase() || '';
-
+    
     filteredCourses = coursesData.filter(course => {
         const matchesLevel = levelFilter === 'all' || course.level === levelFilter;
         const matchesTopic = topicFilter === 'all' || course.topic === topicFilter;
-        const matchesSearch = course.title.toLowerCase().includes(searchQuery) ||
-            course.description.toLowerCase().includes(searchQuery);
-
+        const matchesSearch = course.title.toLowerCase().includes(searchQuery) || 
+                            course.description.toLowerCase().includes(searchQuery);
+        
         return matchesLevel && matchesTopic && matchesSearch;
     });
-
+    
     renderCourses();
 }
 
@@ -381,10 +400,10 @@ function showCourseDetail(courseId) {
     document.getElementById('detailDuration').textContent = course.duration;
     document.getElementById('detailLessons').textContent = `${course.lessons} lessons`;
     document.getElementById('detailStudents').textContent = `${course.students} students`;
-
+    
     document.getElementById('detailObjectives').innerHTML = course.objectives
         .map(obj => `<li>${obj}</li>`).join('');
-
+    
     document.getElementById('detailContent').innerHTML = course.curriculum
         .map((item, index) => `
             <div class="curriculum-item">
@@ -392,11 +411,11 @@ function showCourseDetail(courseId) {
                 <span>${item.duration}</span>
             </div>
         `).join('');
-
+    
     document.getElementById('detailPrerequisites').textContent = course.prerequisites;
-
+    
     document.getElementById('enrollBtn').dataset.courseId = courseId;
-
+    
     openModal('courseDetailModal');
 }
 
@@ -432,10 +451,10 @@ function closeModal(modalId) {
 function showToast(message, type = 'success') {
     const toast = document.getElementById('toast');
     const toastMessage = document.getElementById('toastMessage');
-
+    
     toastMessage.textContent = message;
     toast.className = `toast ${type} show`;
-
+    
     setTimeout(() => {
         toast.classList.remove('show');
     }, 3000);

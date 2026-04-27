@@ -1,4 +1,4 @@
-﻿// Initialize
+// Initialize
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     animateStats();

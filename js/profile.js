@@ -1,4 +1,4 @@
-﻿// Sample user data
+// Sample user data
 const userData = {
     name: 'John Doe',
     email: 'john@example.com',
@@ -54,22 +54,22 @@ function loadUserData() {
     document.getElementById('profileName').textContent = userData.name;
     document.getElementById('profileEmail').textContent = userData.email;
     document.getElementById('profileLevel').textContent = `${userData.level} Level`;
-
+    
     // Update avatar initials
     const initials = userData.name.split(' ').map(n => n[0]).join('').toUpperCase();
     document.getElementById('avatarInitials').textContent = initials;
-
+    
     // Update quick stats
     document.getElementById('totalXP').textContent = userData.xp.toLocaleString();
     document.getElementById('coursesCompleted').textContent = userData.coursesCompleted;
     document.getElementById('currentStreak').textContent = userData.streak;
-
+    
     // Render achievements
     renderAchievements();
-
+    
     // Render activity
     renderActivity();
-
+    
     // Render courses
     renderCourses();
 }
@@ -151,10 +151,10 @@ function animateProgressCircles() {
         const progress = parseInt(circle.dataset.progress);
         const ring = circle.querySelector('.progress-ring');
         const value = circle.querySelector('.progress-value');
-
+        
         const circumference = 2 * Math.PI * 45;
         const offset = circumference - (progress / 100) * circumference;
-
+        
         setTimeout(() => {
             ring.style.strokeDashoffset = offset;
             value.textContent = `${progress}%`;
@@ -170,29 +170,29 @@ function openEditProfile() {
 
 function handleProfileUpdate(e) {
     e.preventDefault();
-
+    
     const newName = document.getElementById('editName').value.trim();
     const newEmail = document.getElementById('editEmail').value.trim();
     const newPassword = document.getElementById('newPassword').value;
-
+    
     if (!newName || !newEmail) {
         showToast('Please fill in all required fields', 'error');
         return;
     }
-
+    
     // Update user data
     userData.name = newName;
     userData.email = newEmail;
-
+    
     // Update localStorage
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     currentUser.name = newName;
     currentUser.email = newEmail;
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
+    
     // Reload data
     loadUserData();
-
+    
     closeModal('editProfileModal');
     showToast('Profile updated successfully!', 'success');
 }

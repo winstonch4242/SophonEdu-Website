@@ -1,9 +1,10 @@
-﻿// State Management
+// State Management
 const state = {
     currentUser: null,
     currentView: 'guest',
     lessons: [],
     students: [],
+    courses: [],
     badges: [
         { id: 1, name: 'First Steps', icon: '🎯', unlocked: false },
         { id: 2, name: 'Quick Learner', icon: '⚡', unlocked: false },
@@ -106,6 +107,64 @@ const sampleStudents = [
     { id: 3, name: 'Bob Johnson', email: 'bob@example.com', level: 'degree', progress: 23 }
 ];
 
+const sampleCourses = [
+    {
+        id: 1,
+        title: 'HTML Fundamentals',
+        description: 'Learn the building blocks of web development',
+        level: 'foundation',
+        topic: 'html',
+        duration: '4 hours',
+        lessons: 8,
+        students: 2543,
+        icon: '📄'
+    },
+    {
+        id: 2,
+        title: 'CSS Styling Mastery',
+        description: 'Master CSS to create beautiful designs',
+        level: 'foundation',
+        topic: 'css',
+        duration: '6 hours',
+        lessons: 10,
+        students: 2198,
+        icon: '🎨'
+    },
+    {
+        id: 3,
+        title: 'JavaScript Essentials',
+        description: 'Master JavaScript fundamentals',
+        level: 'foundation',
+        topic: 'javascript',
+        duration: '8 hours',
+        lessons: 12,
+        students: 3421,
+        icon: '⚡'
+    },
+    {
+        id: 4,
+        title: 'Advanced JavaScript',
+        description: 'Deep dive into advanced concepts',
+        level: 'diploma',
+        topic: 'javascript',
+        duration: '10 hours',
+        lessons: 15,
+        students: 1876,
+        icon: '🔥'
+    },
+    {
+        id: 5,
+        title: 'React Fundamentals',
+        description: 'Build modern web applications',
+        level: 'diploma',
+        topic: 'react',
+        duration: '12 hours',
+        lessons: 18,
+        students: 2954,
+        icon: '⚛️'
+    }
+];
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
@@ -128,7 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
 function initializeApp() {
     state.lessons = [...sampleLessons];
     state.students = [...sampleStudents];
-
+    state.courses = [...sampleCourses];
+    
     // Check for existing session but don't auto-switch view
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
@@ -211,6 +271,7 @@ function setupEventListeners() {
 
     // Admin CRUD
     document.getElementById('addLessonBtn')?.addEventListener('click', () => openCrudModal('add', 'lesson'));
+    document.getElementById('addCourseBtn')?.addEventListener('click', () => openCrudModal('add', 'course'));
     document.getElementById('crudForm')?.addEventListener('submit', handleCrudSubmit);
     document.getElementById('cancelCrudBtn')?.addEventListener('click', () => closeModal('crudModal'));
 
@@ -314,10 +375,10 @@ function handleRegistration(e) {
         xp: 0,
         badges: []
     };
-
+    
     state.currentUser = user;
     localStorage.setItem('currentUser', JSON.stringify(user));
-
+    
     showToast(`Welcome to SophonEdu! Your ${learningPath} learning path is ready.`, 'success');
     setTimeout(() => {
         switchView('member');
@@ -341,7 +402,9 @@ function handleLogin(e) {
         localStorage.setItem('currentUser', JSON.stringify(state.currentUser));
         closeModal('loginModal');
         showToast('Welcome back, Admin!', 'success');
-        setTimeout(() => switchView('admin'), 1000);
+        setTimeout(() => {
+            window.location.href = 'pages/admin.html';
+        }, 1000);
     } else if (email && password) {
         // Demo member login
         state.currentUser = {
@@ -569,6 +632,7 @@ function submitQuiz() {
 
 // Admin Panel
 function renderAdminPanel() {
+    renderCoursesTable();
     renderLessonsTable();
     renderStudentsTable();
 }
@@ -581,10 +645,30 @@ function switchAdminTab(tab) {
     document.getElementById(`${tab}Tab`)?.classList.add('active');
 }
 
+function renderCoursesTable() {
+    const tbody = document.getElementById('coursesTableBody');
+    if (!tbody) return;
+    
+    tbody.innerHTML = state.courses.map(course => `
+        <tr>
+            <td>${course.title}</td>
+            <td><span class="level-badge ${course.level}">${course.level}</span></td>
+            <td>${course.topic}</td>
+            <td>${course.duration}</td>
+            <td>${course.lessons}</td>
+            <td>${course.students}</td>
+            <td class="action-buttons">
+                <button class="btn-edit" onclick="editCourse(${course.id})">Edit</button>
+                <button class="btn-delete" onclick="deleteCourse(${course.id})">Delete</button>
+            </td>
+        </tr>
+    `).join('');
+}
+
 function renderLessonsTable() {
     const tbody = document.getElementById('lessonsTableBody');
     if (!tbody) return;
-
+    
     tbody.innerHTML = state.lessons.map(lesson => `
         <tr>
             <td>${lesson.title}</td>
@@ -622,14 +706,41 @@ function openCrudModal(action, type, id = null) {
     const modal = document.getElementById('crudModal');
     const title = document.getElementById('crudModalTitle');
     const fields = document.getElementById('crudFormFields');
-
+    
     state.crudAction = action;
     state.crudType = type;
     state.crudId = id;
-
-    title.textContent = `${action === 'add' ? 'Add' : 'Edit'} ${type === 'lesson' ? 'Lesson' : 'Student'}`;
-
-    if (type === 'lesson') {
+    
+    title.textContent = `${action === 'add' ? 'Add' : 'Edit'} ${type === 'lesson' ? 'Lesson' : type === 'course' ? 'Course' : 'Student'}`;
+    
+    if (type === 'course') {
+        const course = id ? state.courses.find(c => c.id === id) : {};
+        fields.innerHTML = `
+            <input type="text" id="courseTitle" placeholder="Course Title" value="${course.title || ''}" required>
+            <textarea id="courseDescription" placeholder="Course Description" rows="3" required>${course.description || ''}</textarea>
+            <select id="courseLevel" required>
+                <option value="">Select Level</option>
+                <option value="foundation" ${course.level === 'foundation' ? 'selected' : ''}>Foundation</option>
+                <option value="diploma" ${course.level === 'diploma' ? 'selected' : ''}>Diploma</option>
+                <option value="degree" ${course.level === 'degree' ? 'selected' : ''}>Degree</option>
+            </select>
+            <select id="courseTopic" required>
+                <option value="">Select Topic</option>
+                <option value="html" ${course.topic === 'html' ? 'selected' : ''}>HTML</option>
+                <option value="css" ${course.topic === 'css' ? 'selected' : ''}>CSS</option>
+                <option value="javascript" ${course.topic === 'javascript' ? 'selected' : ''}>JavaScript</option>
+                <option value="react" ${course.topic === 'react' ? 'selected' : ''}>React</option>
+                <option value="node" ${course.topic === 'node' ? 'selected' : ''}>Node.js</option>
+                <option value="database" ${course.topic === 'database' ? 'selected' : ''}>Database</option>
+                <option value="architecture" ${course.topic === 'architecture' ? 'selected' : ''}>Architecture</option>
+                <option value="algorithms" ${course.topic === 'algorithms' ? 'selected' : ''}>Algorithms</option>
+                <option value="cloud" ${course.topic === 'cloud' ? 'selected' : ''}>Cloud</option>
+            </select>
+            <input type="text" id="courseDuration" placeholder="Duration (e.g., 4 hours)" value="${course.duration || ''}" required>
+            <input type="number" id="courseLessons" placeholder="Number of Lessons" value="${course.lessons || ''}" required>
+            <input type="text" id="courseIcon" placeholder="Icon (emoji)" value="${course.icon || '📚'}" maxlength="2">
+        `;
+    } else if (type === 'lesson') {
         const lesson = id ? state.lessons.find(l => l.id === id) : {};
         fields.innerHTML = `
             <input type="text" id="lessonTitle" placeholder="Lesson Title" value="${lesson.title || ''}" required>
@@ -662,8 +773,34 @@ function openCrudModal(action, type, id = null) {
 
 function handleCrudSubmit(e) {
     e.preventDefault();
-
-    if (state.crudType === 'lesson') {
+    
+    if (state.crudType === 'course') {
+        const courseData = {
+            title: document.getElementById('courseTitle').value,
+            description: document.getElementById('courseDescription').value,
+            level: document.getElementById('courseLevel').value,
+            topic: document.getElementById('courseTopic').value,
+            duration: document.getElementById('courseDuration').value,
+            lessons: parseInt(document.getElementById('courseLessons').value),
+            icon: document.getElementById('courseIcon').value || '📚',
+            students: 0
+        };
+        
+        if (state.crudAction === 'add') {
+            courseData.id = Date.now();
+            state.courses.push(courseData);
+            showToast('Course added successfully', 'success');
+        } else {
+            const index = state.courses.findIndex(c => c.id === state.crudId);
+            if (index !== -1) {
+                state.courses[index] = { ...state.courses[index], ...courseData };
+                showToast('Course updated successfully', 'success');
+            }
+        }
+        
+        localStorage.setItem('courses', JSON.stringify(state.courses));
+        renderCoursesTable();
+    } else if (state.crudType === 'lesson') {
         const lessonData = {
             title: document.getElementById('lessonTitle').value,
             level: document.getElementById('lessonLevel').value,
@@ -773,6 +910,11 @@ function loadFromLocalStorage() {
     if (savedLessons) {
         state.lessons = JSON.parse(savedLessons);
     }
+    
+    const savedCourses = localStorage.getItem('courses');
+    if (savedCourses) {
+        state.courses = JSON.parse(savedCourses);
+    }
 }
 
 // Make functions globally accessible
@@ -782,11 +924,27 @@ window.deleteLesson = deleteLesson;
 window.editStudent = editStudent;
 window.deleteStudent = deleteStudent;
 window.viewCoursesByLevel = viewCoursesByLevel;
+window.editCourse = editCourse;
+window.deleteCourse = deleteCourse;
 
 // View courses by level function
 function viewCoursesByLevel(level) {
     // Store the selected level in sessionStorage
     sessionStorage.setItem('selectedLevel', level);
     // Redirect to courses page
-    window.location.href = 'pages/courses.aspx';
+    window.location.href = 'pages/courses.html';
+}
+
+// Course CRUD functions
+function editCourse(id) {
+    openCrudModal('edit', 'course', id);
+}
+
+function deleteCourse(id) {
+    if (confirm('Are you sure you want to delete this course?')) {
+        state.courses = state.courses.filter(c => c.id !== id);
+        localStorage.setItem('courses', JSON.stringify(state.courses));
+        renderCoursesTable();
+        showToast('Course deleted successfully', 'success');
+    }
 }
