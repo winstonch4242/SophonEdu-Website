@@ -3,6 +3,18 @@
   "WorkspaceRootPath": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|c:\\users\\user\\documents\\github\\sophonedu-website\\sophonedu\\index.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\index.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|c:\\users\\user\\documents\\github\\sophonedu-website\\sophonedu\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|c:\\users\\user\\documents\\github\\sophonedu-website\\sophonedu\\pages\\admin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
+      "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\pages\\admin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|c:\\users\\user\\documents\\github\\sophonedu-website\\sophonedu\\pages\\about.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
       "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\pages\\about.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     }
@@ -19,6 +31,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "index.aspx.cs",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\SophonEdu\\index.aspx.cs",
+              "RelativeDocumentMoniker": "SophonEdu\\index.aspx.cs",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\SophonEdu\\index.aspx.cs",
+              "RelativeToolTip": "SophonEdu\\index.aspx.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-28T06:53:38.143Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "index.aspx",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\SophonEdu\\index.aspx",
+              "RelativeDocumentMoniker": "SophonEdu\\index.aspx",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\SophonEdu\\index.aspx",
+              "RelativeToolTip": "SophonEdu\\index.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-28T06:53:19.303Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "admin.aspx",
+              "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\SophonEdu\\pages\\admin.aspx",
+              "RelativeDocumentMoniker": "SophonEdu\\pages\\admin.aspx",
+              "ToolTip": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\SophonEdu\\pages\\admin.aspx",
+              "RelativeToolTip": "SophonEdu\\pages\\admin.aspx",
+              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
+              "WhenOpened": "2026-04-28T06:53:15.4Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "about.aspx",
               "DocumentMoniker": "C:\\Users\\User\\Documents\\GitHub\\SophonEdu-Website\\SophonEdu\\pages\\about.aspx",
               "RelativeDocumentMoniker": "SophonEdu\\pages\\about.aspx",
