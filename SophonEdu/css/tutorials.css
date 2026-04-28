@@ -1,0 +1,328 @@
+.tutorial-categories {
+    background: var(--white);
+    padding: 2rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.category-tabs {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-tab {
+    padding: 0.75rem 2rem;
+    border: 2px solid var(--light);
+    background: var(--white);
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.category-tab.active {
+    background: var(--gradient-accent);
+    color: var(--white);
+    border-color: transparent;
+    box-shadow: var(--shadow);
+}
+
+.category-tab:hover {
+    border-color: var(--primary);
+}
+
+.tutorials-section {
+    padding: 4rem 0;
+    background: var(--bg-light);
+}
+
+.tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.tutorial-item {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.tutorial-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-colored);
+    border-color: var(--accent);
+}
+
+.tutorial-preview-section {
+    background: var(--dark);
+    padding: 2rem;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.tutorial-code-display {
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    color: var(--light);
+    text-align: left;
+    width: 100%;
+}
+
+.tutorial-difficulty {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.tutorial-info {
+    padding: 1.5rem;
+}
+
+.tutorial-info h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: var(--dark);
+}
+
+.tutorial-info p {
+    color: var(--gray);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.tutorial-meta {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--light);
+    font-size: 0.9rem;
+    color: var(--gray);
+}
+
+.tutorial-workspace {
+    max-width: 95vw;
+    width: 1400px;
+    max-height: 90vh;
+    padding: 1.5rem;
+}
+
+.tutorial-header {
+    margin-bottom: 1.5rem;
+}
+
+.tutorial-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.tutorial-progress-bar {
+    height: 8px;
+    background: var(--light);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.tutorial-progress-fill {
+    height: 100%;
+    background: var(--gradient-accent);
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.tutorial-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    height: calc(90vh - 200px);
+}
+
+.tutorial-instructions {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.tutorial-instructions h3 {
+    margin-bottom: 1rem;
+    color: var(--dark);
+}
+
+.tutorial-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    gap: 1rem;
+}
+
+.tutorial-editor {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: var(--shadow);
+}
+
+.editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.btn-small {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: var(--light);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-small:hover {
+    background: var(--gray);
+    color: var(--white);
+}
+
+#codeEditor {
+    flex: 1;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    padding: 1rem;
+    border: 2px solid var(--light);
+    border-radius: 8px;
+    resize: none;
+    background: var(--dark);
+    color: var(--light);
+    line-height: 1.6;
+}
+
+#codeEditor:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+#runCodeBtn {
+    margin-top: 1rem;
+}
+
+.tutorial-output {
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.output-tabs {
+    display: flex;
+    background: var(--light);
+    border-bottom: 2px solid var(--light);
+}
+
+.output-tab {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.output-tab.active {
+    background: var(--white);
+    color: var(--primary);
+}
+
+.output-content {
+    flex: 1;
+    position: relative;
+}
+
+.output-panel {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.output-panel.active {
+    display: block;
+}
+
+#previewFrame {
+    border: none;
+    background: var(--white);
+}
+
+#consoleOutput {
+    padding: 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    overflow-y: auto;
+    background: var(--dark);
+    color: var(--light);
+}
+
+.console-log {
+    padding: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.console-error {
+    color: var(--danger);
+}
+
+.console-success {
+    color: var(--success);
+}
+
+@media (max-width: 1200px) {
+    .tutorial-layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        height: auto;
+    }
+    
+    .tutorial-instructions,
+    .tutorial-editor,
+    .tutorial-output {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tutorial-workspace {
+        padding: 1rem;
+    }
+}
