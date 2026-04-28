@@ -194,18 +194,18 @@
                         <p>Join thousands of students mastering programming skills</p>
                         <form id="registrationForm" class="registration-form" runat="server">
                             <div class="form-row">
-                                <input type="text" id="regName" placeholder="Full Name" required>
-                                <input type="email" id="regEmail" placeholder="Email Address" required>
+                                <input type="text" id="regName" placeholder="Full Name">
+                                <input type="email" id="regEmail" placeholder="Email Address">
                             </div>
                             <div class="form-row">
-                                <input type="password" id="regPassword" placeholder="Password (min 6 characters)" required>
-                                <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+                                <input type="password" id="regPassword" placeholder="Password (min 6 characters)">
+                                <input type="password" id="regConfirmPassword" placeholder="Confirm Password">
                             </div>
                             <div class="form-group-full">
                                 <label style="color: var(--white); font-weight: 600; margin-bottom: 1rem; display: block;">Choose Your Learning Path:</label>
                                 <div class="learning-path-options">
                                     <label class="path-option">
-                                        <input type="radio" name="learningPath" value="foundation" required>
+                                        <input type="radio" name="learningPath" value="foundation">
                                         <div class="path-card">
                                             <span class="path-icon">🎯</span>
                                             <h4>Foundation</h4>
@@ -213,7 +213,7 @@
                                         </div>
                                     </label>
                                     <label class="path-option">
-                                        <input type="radio" name="learningPath" value="diploma" required>
+                                        <input type="radio" name="learningPath" value="diploma">
                                         <div class="path-card">
                                             <span class="path-icon">🚀</span>
                                             <h4>Diploma</h4>
@@ -221,7 +221,7 @@
                                         </div>
                                     </label>
                                     <label class="path-option">
-                                        <input type="radio" name="learningPath" value="degree" required>
+                                        <input type="radio" name="learningPath" value="degree">
                                         <div class="path-card">
                                             <span class="path-icon">🎓</span>
                                             <h4>Degree</h4>
