@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="../css/admin.css">
 </head>
 <body>
+
+  <form id="form1" runat="server">
+    <asp:Label ID="lblAdminEmail" runat="server" ClientIDMode="Static" Style="display:none;" />
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -188,6 +191,9 @@
                     </div>
                 </div>
             </div>
+            <br />
+            <asp:GridView ID="GridView1" runat="server">
+            </asp:GridView>
         </div>
     </main>
 
@@ -311,5 +317,8 @@
 
     <script src="../js/auth.js"></script>
     <script src="../js/admin.js"></script>
+
+  </form>
+
 </body>
 </html>

@@ -112,22 +112,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Check Admin Authentication
 function checkAdminAuth() {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
-        window.location.href = '../index.html';
+    // ✅ Read from the hidden label set by ASP.NET Session
+    const adminEmail = document.getElementById('lblAdminEmail')?.innerText;
+
+    if (!adminEmail) {
+        // Session expired or not logged in — C# will handle redirect,
+        // but add fallback just in case
+        window.location.href = '../index.aspx';
         return;
     }
-    
-    const user = JSON.parse(currentUser);
-    if (user.role !== 'admin') {
-        showToast('Access denied. Admin only.', 'error');
-        setTimeout(() => {
-            window.location.href = '../index.html';
-        }, 2000);
-        return;
+
+    // Display admin name in navbar
+    const adminNameEl = document.getElementById('adminName');
+    if (adminNameEl) {
+        adminNameEl.textContent = adminEmail.split('@')[0]; // e.g. "james.smith"
     }
-    
-    document.getElementById('adminName').textContent = user.name;
 }
 
 // Initialize Data
@@ -477,7 +476,7 @@ function handleLogout() {
         localStorage.removeItem('currentUser');
         showToast('Logged out successfully!', 'success');
         setTimeout(() => {
-            window.location.href = '../index.html';
+            window.location.href = '../index.aspx';
         }, 1000);
     }
 }
