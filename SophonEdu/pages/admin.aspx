@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin.aspx.cs" Inherits="SophonEdu.pages.admin" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="admin.aspx.cs" Inherits="SophonEdu.pages.admin" %>
 
 
 <!DOCTYPE html>
@@ -9,20 +9,24 @@
     <title>Admin Panel - SophonEdu</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/admin.css">
+    <style type="text/css">
+        .input {}
+    </style>
 </head>
 <body>
+    <form id="form1" runat="server">
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="logo">
-                <a href="../index.aspx" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
+                <a href="pages/admin.aspx" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 0.5rem;">
                     <img src="../images/logo.png" alt="SophonEdu" class="logo-image">
                 </a>
             </div>
             <div class="admin-info">
                 <span class="admin-badge">👑 Admin Panel</span>
                 <span class="admin-name" id="adminName">Admin</span>
-                <button class="btn-secondary" id="adminLogoutBtn">Logout</button>
+                <asp:Button ID="Logout" runat="server" Text="Logout" OnClick="btnLogout_Click" CssClass="btn-secondary" />
             </div>
         </div>
     </nav>
@@ -55,41 +59,159 @@
                     <span>Analytics</span>
                 </button>
             </div>
-
             <!-- Courses Tab -->
             <div class="tab-content active" id="coursesTab">
                 <div class="content-header">
                     <div>
                         <h2>Course Management</h2>
                         <p>Create, edit, and manage all courses</p>
+                        <p>
+                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="CourseID" DataSourceID="SqlDataSource1" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                <AlternatingRowStyle BackColor="White" />
+                                <Columns>
+                                    <asp:CommandField ShowSelectButton="True" />
+                                    <asp:BoundField DataField="CourseID" HeaderText="CourseID" InsertVisible="False" ReadOnly="True" SortExpression="CourseID" />
+                                    <asp:BoundField DataField="CourseName" HeaderText="CourseName" SortExpression="CourseName" />
+                                    <asp:BoundField DataField="TotalXP" HeaderText="TotalXP" SortExpression="TotalXP" />
+                                    <asp:BoundField DataField="ExpertiseLevel" HeaderText="ExpertiseLevel" SortExpression="ExpertiseLevel" />
+                                    <asp:BoundField DataField="CourseDescription" HeaderText="CourseDescription" SortExpression="CourseDescription" />
+                                    <asp:BoundField DataField="TotalDuration" HeaderText="TotalDuration" SortExpression="TotalDuration" />
+                                </Columns>
+                                <EditRowStyle BackColor="#2461BF" />
+                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                <RowStyle BackColor="#EFF3FB" />
+                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                            </asp:GridView>
+                        </p>
+                        <p>
+                            <asp:Button ID="btnAdd" runat="server" Text="Add" OnClick="btnAdd_Click" CssClass="btn-primary" />
+&nbsp;<asp:Button ID="btnUpdate" runat="server" Text="Update" OnClick="btnUpdate_Click" CssClass="btn-primary" />
+&nbsp;<asp:Button ID="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" CssClass="btn-primary" />
+                        </p>
+                        <p>
+                            &nbsp;</p>
+                        <p>
+                            <b>Course Name:</b> <asp:TextBox ID="courseNameTxt" runat="server" CssClass="input" Placeholder="Course Name" Height="24px"/>
+                        </p>
+                        <p>
+                            <b>Total XP: 
+                            <asp:TextBox ID="totalXP" runat="server" Height="24px" TextMode="Number"></asp:TextBox>
+                            </b> 
+                        </p>
+                        <p>
+                            <b>Expertise Level:</b>
+                            <b>
+                            <asp:TextBox ID="levelTxt" runat="server" Height="24px"></asp:TextBox>
+                            </b> 
+                        </p>
+                        <p>
+                            <b>Course Description:&nbsp;
+                            <asp:TextBox ID="descTxt" runat="server" Height="24px" TextMode="MultiLine"></asp:TextBox>
+                            </b> 
+                        </p>
+                        <p>
+                            <b>Total Duration:&nbsp;
+                            <asp:TextBox ID="durationTxt" runat="server" Height="24px"></asp:TextBox>
+                            </b>
+                        </p>
+                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SophonEduDB %>" DeleteCommand="DELETE FROM [CoursesData] WHERE [CourseID] = @CourseID" InsertCommand="INSERT INTO [CoursesData] ([CourseName], [TotalXP], [ExpertiseLevel], [CourseDescription], [TotalDuration]) VALUES (@CourseName, @TotalXP, @ExpertiseLevel, @CourseDescription, @TotalDuration)" OnSelecting="SqlDataSource1_Selecting" SelectCommand="SELECT * FROM [CoursesData]" UpdateCommand="UPDATE [CoursesData] SET [CourseName] = @CourseName, [TotalXP] = @TotalXP, [ExpertiseLevel] = @ExpertiseLevel, [CourseDescription] = @CourseDescription, [TotalDuration] = @TotalDuration WHERE [CourseID] = @CourseID">
+                            <DeleteParameters>
+                                <asp:SessionParameter Name="CourseID" SessionField="CourseID" Type="Int32" />
+                            </DeleteParameters>
+                            <InsertParameters>
+                                <asp:ControlParameter ControlID="courseNameTxt" Name="CourseName" PropertyName="Text" Type="String" />
+                                <asp:ControlParameter ControlID="totalXP" Name="TotalXP" PropertyName="Text" Type="Int32" />
+                                <asp:ControlParameter ControlID="levelTxt" Name="ExpertiseLevel" PropertyName="Text" Type="String" />
+                                <asp:ControlParameter ControlID="descTxt" Name="CourseDescription" PropertyName="Text" Type="String" />
+                                <asp:ControlParameter ControlID="durationTxt" Name="TotalDuration" PropertyName="Text" Type="String" />
+                            </InsertParameters>
+                            <UpdateParameters>
+                                <asp:ControlParameter ControlID="courseNameTxt" Name="CourseName" PropertyName="Text" Type="String" />
+                                <asp:ControlParameter ControlID="totalXP" Name="TotalXP" PropertyName="Text" Type="Int32" />
+                                <asp:ControlParameter ControlID="levelTxt" Name="ExpertiseLevel" PropertyName="Text" Type="String" />
+                                <asp:ControlParameter ControlID="descTxt" Name="CourseDescription" PropertyName="Text" Type="String" />
+                                <asp:ControlParameter ControlID="durationTxt" Name="TotalDuration" PropertyName="Text" Type="String" />
+                                <asp:SessionParameter Name="CourseID" SessionField="CourseID" Type="Int32" />
+                            </UpdateParameters>
+                        </asp:SqlDataSource>
+                            <p>
+                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SophonEduDB %>" DeleteCommand="DELETE FROM [LearnersData] WHERE [LearnerID] = @LearnerID" InsertCommand="INSERT INTO [LearnersData] ([FirstName], [LastName], [Age], [Gender], [LevelOfStudy], [EmailAddress], [Username], [Password], [Salt], [PasswordHash]) VALUES (@FirstName, @LastName, @Age, @Gender, @LevelOfStudy, @EmailAddress, @Username, @Password, @Salt, @PasswordHash)" SelectCommand="SELECT * FROM [LearnersData]" UpdateCommand="UPDATE [LearnersData] SET [FirstName] = @FirstName, [LastName] = @LastName, [Age] = @Age, [Gender] = @Gender, [LevelOfStudy] = @LevelOfStudy, [EmailAddress] = @EmailAddress, [Username] = @Username, [Password] = @Password, [Salt] = @Salt, [PasswordHash] = @PasswordHash WHERE [LearnerID] = @LearnerID">
+                                <DeleteParameters>
+                                    <asp:Parameter Name="LearnerID" Type="Int32" />
+                                </DeleteParameters>
+                                <InsertParameters>
+                                    <asp:Parameter Name="FirstName" Type="String" />
+                                    <asp:Parameter Name="LastName" Type="String" />
+                                    <asp:Parameter Name="Age" Type="Int32" />
+                                    <asp:Parameter Name="Gender" Type="String" />
+                                    <asp:Parameter Name="LevelOfStudy" Type="String" />
+                                    <asp:Parameter Name="EmailAddress" Type="String" />
+                                    <asp:Parameter Name="Username" Type="String" />
+                                    <asp:Parameter Name="Password" Type="String" />
+                                    <asp:Parameter Name="Salt" Type="Object" />
+                                    <asp:Parameter Name="PasswordHash" Type="Object" />
+                                </InsertParameters>
+                                <UpdateParameters>
+                                    <asp:Parameter Name="FirstName" Type="String" />
+                                    <asp:Parameter Name="LastName" Type="String" />
+                                    <asp:Parameter Name="Age" Type="Int32" />
+                                    <asp:Parameter Name="Gender" Type="String" />
+                                    <asp:Parameter Name="LevelOfStudy" Type="String" />
+                                    <asp:Parameter Name="EmailAddress" Type="String" />
+                                    <asp:Parameter Name="Username" Type="String" />
+                                    <asp:Parameter Name="Password" Type="String" />
+                                    <asp:Parameter Name="Salt" Type="Object" />
+                                    <asp:Parameter Name="PasswordHash" Type="Object" />
+                                    <asp:Parameter Name="LearnerID" Type="Int32" />
+                                </UpdateParameters>
+                            </asp:SqlDataSource>
+                        </p>
+                        </div>
+                        <div class="tab-content" id="studentsTab">
+                            <div class="content-header">
+                                <div>
+                                    <h2>Student Management</h2>
+                                    <p>View and manage all registered students</p>
+                                </div>
+                            </div>
+                            <p>
+                                <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="LearnerID" DataSourceID="SqlDataSource2" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                    <AlternatingRowStyle BackColor="White" />
+                                    <Columns>
+                                        <asp:CommandField ShowSelectButton="True" />
+                                        <asp:BoundField DataField="LearnerID" HeaderText="LearnerID" InsertVisible="False" ReadOnly="True" SortExpression="LearnerID" />
+                                        <asp:BoundField DataField="FirstName" HeaderText="FirstName" SortExpression="FirstName" />
+                                        <asp:BoundField DataField="LastName" HeaderText="LastName" SortExpression="LastName" />
+                                        <asp:BoundField DataField="Age" HeaderText="Age" SortExpression="Age" />
+                                        <asp:BoundField DataField="Gender" HeaderText="Gender" SortExpression="Gender" />
+                                        <asp:BoundField DataField="LevelOfStudy" HeaderText="LevelOfStudy" SortExpression="LevelOfStudy" />
+                                        <asp:BoundField DataField="EmailAddress" HeaderText="EmailAddress" SortExpression="EmailAddress" />
+                                        <asp:BoundField DataField="Username" HeaderText="Username" SortExpression="Username" />
+                                        <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
+                                        <asp:BoundField DataField="Salt" HeaderText="Salt" SortExpression="Salt" />
+                                    </Columns>
+                                    <EditRowStyle BackColor="#2461BF" />
+                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <RowStyle BackColor="#EFF3FB" />
+                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                    <SortedAscendingCellStyle BackColor="#F5F7FB" />
+                                    <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+                                    <SortedDescendingCellStyle BackColor="#E9EBEF" />
+                                    <SortedDescendingHeaderStyle BackColor="#4870BE" />
+                                </asp:GridView>
+                            </p>
+                        </div>
                     </div>
-                    <button class="btn-primary btn-large" id="addCourseBtn">
-                        <span>+</span> Add New Course
-                    </button>
                 </div>
-
-                <div class="data-table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Title</th>
-                                <th>Level</th>
-                                <th>Topic</th>
-                                <th>Duration</th>
-                                <th>Lessons</th>
-                                <th>Students</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="coursesTableBody">
-                            <!-- Populated by JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <!-- Lessons Tab -->
+            <!-- Lessons -->
             <div class="tab-content" id="lessonsTab">
                 <div class="content-header">
                     <div>
@@ -119,197 +241,8 @@
                     </table>
                 </div>
             </div>
-
-            <!-- Students Tab -->
-            <div class="tab-content" id="studentsTab">
-                <div class="content-header">
-                    <div>
-                        <h2>Student Management</h2>
-                        <p>View and manage all registered students</p>
-                    </div>
-                </div>
-
-                <div class="data-table-container">
-                    <table class="data-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Level</th>
-                                <th>Progress</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="studentsTableBody">
-                            <!-- Populated by JS -->
-                        </tbody>
-                    </table>
-                </div>
             </div>
-
-            <!-- Analytics Tab -->
-            <div class="tab-content" id="analyticsTab">
-                <div class="content-header">
-                    <div>
-                        <h2>Platform Analytics</h2>
-                        <p>Overview of platform statistics</p>
-                    </div>
-                </div>
-
-                <div class="analytics-grid">
-                    <div class="stat-card">
-                        <div class="stat-icon">🎓</div>
-                        <div class="stat-info">
-                            <h3 id="totalCourses">0</h3>
-                            <p>Total Courses</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">📚</div>
-                        <div class="stat-info">
-                            <h3 id="totalLessons">0</h3>
-                            <p>Total Lessons</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">👥</div>
-                        <div class="stat-info">
-                            <h3 id="totalStudents">0</h3>
-                            <p>Total Students</p>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">⭐</div>
-                        <div class="stat-info">
-                            <h3 id="avgProgress">0%</h3>
-                            <p>Avg Progress</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
-
-    <!-- Course Modal -->
-    <div class="modal" id="courseModal">
-        <div class="modal-content modal-large">
-            <div class="modal-header">
-                <h2 id="courseModalTitle">Add New Course</h2>
-                <button class="modal-close" id="closeCourseModal">&times;</button>
-            </div>
-            <form id="courseForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Course Title *</label>
-                        <input type="text" id="courseTitle" placeholder="e.g., JavaScript Fundamentals" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Icon (Emoji)</label>
-                        <input type="text" id="courseIcon" placeholder="📚" maxlength="2">
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Description *</label>
-                        <textarea id="courseDescription" rows="3" placeholder="Brief course description" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label>Level *</label>
-                        <select id="courseLevel" required>
-                            <option value="">Select Level</option>
-                            <option value="foundation">Foundation</option>
-                            <option value="diploma">Diploma</option>
-                            <option value="degree">Degree</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Topic *</label>
-                        <select id="courseTopic" required>
-                            <option value="">Select Topic</option>
-                            <option value="html">HTML</option>
-                            <option value="css">CSS</option>
-                            <option value="javascript">JavaScript</option>
-                            <option value="react">React</option>
-                            <option value="node">Node.js</option>
-                            <option value="database">Database</option>
-                            <option value="architecture">Architecture</option>
-                            <option value="algorithms">Algorithms</option>
-                            <option value="cloud">Cloud</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Duration *</label>
-                        <input type="text" id="courseDuration" placeholder="e.g., 4 hours" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Number of Lessons *</label>
-                        <input type="number" id="courseLessons" placeholder="8" min="1" required>
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn-secondary" id="cancelCourseBtn">Cancel</button>
-                    <button type="submit" class="btn-primary">Save Course</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Lesson Modal -->
-    <div class="modal" id="lessonModal">
-        <div class="modal-content modal-large">
-            <div class="modal-header">
-                <h2 id="lessonModalTitle">Add New Lesson</h2>
-                <button class="modal-close" id="closeLessonModal">&times;</button>
-            </div>
-            <form id="lessonForm">
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label>Lesson Title *</label>
-                        <input type="text" id="lessonTitle" placeholder="e.g., Introduction to HTML" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Level *</label>
-                        <select id="lessonLevel" required>
-                            <option value="">Select Level</option>
-                            <option value="foundation">Foundation</option>
-                            <option value="diploma">Diploma</option>
-                            <option value="degree">Degree</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Duration *</label>
-                        <input type="text" id="lessonDuration" placeholder="e.g., 30 min" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Status *</label>
-                        <select id="lessonStatus" required>
-                            <option value="active">Active</option>
-                            <option value="draft">Draft</option>
-                            <option value="archived">Archived</option>
-                        </select>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Lesson Notes</label>
-                        <textarea id="lessonNotes" rows="4" placeholder="Lesson content and notes"></textarea>
-                    </div>
-                    <div class="form-group full-width">
-                        <label>Code Examples</label>
-                        <textarea id="lessonCode" rows="6" placeholder="Code examples" style="font-family: monospace;"></textarea>
-                    </div>
-                </div>
-                <div class="modal-actions">
-                    <button type="button" class="btn-secondary" id="cancelLessonBtn">Cancel</button>
-                    <button type="submit" class="btn-primary">Save Lesson</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">
-        <span id="toastMessage"></span>
-    </div>
-
-    <script src="../js/auth.js"></script>
-    <script src="../js/admin.js"></script>
+    </form>
 </body>
 </html>

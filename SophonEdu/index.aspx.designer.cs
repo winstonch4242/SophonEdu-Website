@@ -15,13 +15,22 @@ namespace SophonEdu
     {
 
         /// <summary>
+        /// contentform control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm contentform;
+
+        /// <summary>
         /// registrationForm control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm registrationForm;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl registrationForm;
 
         /// <summary>
         /// loginEmail control.
@@ -30,7 +39,7 @@ namespace SophonEdu
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputGenericControl loginEmail;
+        protected global::System.Web.UI.WebControls.TextBox loginEmail;
 
         /// <summary>
         /// loginPassword control.
@@ -39,15 +48,15 @@ namespace SophonEdu
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputPassword loginPassword;
+        protected global::System.Web.UI.WebControls.TextBox loginPassword;
 
         /// <summary>
-        /// loginBtnModal control.
+        /// btnLogin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton loginBtnModal;
+        protected global::System.Web.UI.WebControls.Button btnLogin;
     }
 }

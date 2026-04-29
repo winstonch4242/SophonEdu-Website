@@ -20,8 +20,8 @@ namespace SophonEdu
         }
         protected void LoginBtnModal(object sender, EventArgs e)
         {
-            string emailAddress = loginEmail.Value;
-            string password = loginPassword.Value;
+            string emailAddress = loginEmail.Text;
+            string password = loginPassword.Text;
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
