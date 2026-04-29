@@ -58,7 +58,7 @@ namespace SophonEdu
                     return;
                 }
                 read2.Close();
-                Response.Write("<script>alert('Invalid Credentials');</script>");
+                Response.Redirect("index.aspx");
             }
         }
     }
