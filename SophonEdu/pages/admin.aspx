@@ -140,16 +140,6 @@
                                 <asp:SessionParameter Name="CourseID" SessionField="CourseID" Type="Int32" />
                             </UpdateParameters>
                         </asp:SqlDataSource>
-                        <div class="tab-content" id="lessonsTab">
-                            <div class="content-header">
-                                <div>
-                                    <h2>Lesson Management</h2>
-                                    <p>Create, edit, and manage all lessons</p>
-                                </div>
-                                <button class="btn-primary btn-large" id="addLessonBtn">
-                                    <span>+</span> Add New Lesson
-                                </button>
-                            </div>
                             <p>
                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SophonEduDB %>" DeleteCommand="DELETE FROM [LearnersData] WHERE [LearnerID] = @LearnerID" InsertCommand="INSERT INTO [LearnersData] ([FirstName], [LastName], [Age], [Gender], [LevelOfStudy], [EmailAddress], [Username], [Password], [Salt], [PasswordHash]) VALUES (@FirstName, @LastName, @Age, @Gender, @LevelOfStudy, @EmailAddress, @Username, @Password, @Salt, @PasswordHash)" SelectCommand="SELECT * FROM [LearnersData]" UpdateCommand="UPDATE [LearnersData] SET [FirstName] = @FirstName, [LastName] = @LastName, [Age] = @Age, [Gender] = @Gender, [LevelOfStudy] = @LevelOfStudy, [EmailAddress] = @EmailAddress, [Username] = @Username, [Password] = @Password, [Salt] = @Salt, [PasswordHash] = @PasswordHash WHERE [LearnerID] = @LearnerID">
                                 <DeleteParameters>
@@ -219,9 +209,38 @@
                                 </asp:GridView>
                             </p>
                         </div>
-                        </div>
                     </div>
                 </div>
+            <!-- Lessons -->
+            <div class="tab-content" id="lessonsTab">
+                <div class="content-header">
+                    <div>
+                        <h2>Lesson Management</h2>
+                        <p>Create, edit, and manage all lessons</p>
+                    </div>
+                    <button class="btn-primary btn-large" id="addLessonBtn">
+                        <span>+</span> Add New Lesson
+                    </button>
+                </div>
+
+                <div class="data-table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Level</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lessonsTableBody">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             </div>
     </main>
     </form>
