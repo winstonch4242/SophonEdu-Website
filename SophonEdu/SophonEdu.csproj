@@ -140,6 +140,7 @@
     <Content Include="js\courses.js" />
     <Content Include="js\profile.js" />
     <Content Include="js\tutorials.js" />
+    <Content Include="logout.aspx" />
     <Content Include="pages\about.aspx" />
     <Content Include="pages\admin.aspx" />
     <Content Include="pages\courses.aspx" />
@@ -218,6 +219,13 @@
     </Compile>
     <Compile Include="index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="pages\about.aspx.cs">
       <DependentUpon>about.aspx</DependentUpon>

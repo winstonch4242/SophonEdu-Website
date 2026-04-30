@@ -19,7 +19,7 @@ namespace SophonEdu.pages
 
             if (Session["UserType"].ToString() != "Learner")
             {
-                Response.Redirect("~/index.aspx");
+                Response.Redirect("~/admin.aspx");
                 return;
             }
 
@@ -27,6 +27,10 @@ namespace SophonEdu.pages
             {
                 string userEmail = Session["UserEmail"].ToString();
                 // Use userEmail later to load learner's data from DB
+                string userType = Session["UserType"].ToString();
+
+                ClientScript.RegisterStartupScript(this.GetType(), "sessionData",
+                $"var sessionEmail = '{userEmail}'; var sessionType = '{userType}';", true);
             }
         }
     }

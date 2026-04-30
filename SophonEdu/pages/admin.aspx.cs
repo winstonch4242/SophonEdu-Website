@@ -21,7 +21,7 @@ namespace SophonEdu.pages
             // 2. Logged in but not an admin → send to profile
             if (Session["UserType"].ToString() != "Admin")
             {
-                Response.Redirect("~/index.aspx");
+                Response.Redirect("~/profile.aspx");
                 return;
             }
 

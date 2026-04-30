@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
+
+   <form id="form1" runat="server">
+    <asp:Label ID="lblUserEmail" runat="server" ClientIDMode="Static" Style="display:none;" />
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -180,6 +183,8 @@
 
     <script src="../js/auth.js"></script>
     <script src="../js/profile.js"></script>
+
+  </form>
 </body>
 </html>
 

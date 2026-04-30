@@ -34,20 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function checkAuth() {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
+    if (typeof sessionEmail === 'undefined' || !sessionEmail) {
+        // Session expired or not set — redirect to login
         window.location.href = '../index.aspx';
-    }
+        return;
 }
 
 function loadUserData() {
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
-        const user = JSON.parse(savedUser);
-        userData.name = user.name || userData.name;
-        userData.email = user.email || userData.email;
-        userData.level = user.level || userData.level;
-        userData.xp = user.xp || userData.xp;
+    if (typeof sessionEmail !== 'undefined' && sessionEmail) {
+        userData.email = sessionEmail;
+        // Derive a display name from email (e.g. "alice.tan@email.com" → "Alice Tan")
+        const emailPrefix = sessionEmail.split('@')[0]; // "alice.tan"
+        userData.name = emailPrefix
+            .split(/[._-]/)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(' '); // "Alice Tan"
     }
 
     // Update profile header
@@ -64,13 +65,8 @@ function loadUserData() {
     document.getElementById('coursesCompleted').textContent = userData.coursesCompleted;
     document.getElementById('currentStreak').textContent = userData.streak;
 
-    // Render achievements
     renderAchievements();
-
-    // Render activity
     renderActivity();
-
-    // Render courses
     renderCourses();
 }
 
@@ -173,35 +169,24 @@ function handleProfileUpdate(e) {
 
     const newName = document.getElementById('editName').value.trim();
     const newEmail = document.getElementById('editEmail').value.trim();
-    const newPassword = document.getElementById('newPassword').value;
 
     if (!newName || !newEmail) {
         showToast('Please fill in all required fields', 'error');
         return;
     }
 
-    // Update user data
     userData.name = newName;
     userData.email = newEmail;
 
-    // Update localStorage
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    currentUser.name = newName;
-    currentUser.email = newEmail;
-    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-    // Reload data
     loadUserData();
-
     closeModal('editProfileModal');
     showToast('Profile updated successfully!', 'success');
 }
 
 function handleLogout() {
-    localStorage.removeItem('currentUser');
     showToast('Logged out successfully', 'success');
     setTimeout(() => {
-        window.location.href = '../index.aspx';
+        window.location.href = '../logout.aspx'; // ✅ clears ASP.NET Session
     }, 1000);
 }
 

@@ -7,25 +7,6 @@
       "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\index.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|d:\\sem 2\\data structure\\github\\sophonedu-website\\sophonedu\\pages\\admin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}",
-      "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\pages\\admin.aspx||{57312C73-6202-49E9-B1E1-40EA1A6DC1F6}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|d:\\sem 2\\data structure\\github\\sophonedu-website\\sophonedu\\js\\admin.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\js\\admin.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|d:\\sem 2\\data structure\\github\\sophonedu-website\\sophonedu\\pages\\admin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\pages\\admin.aspx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|d:\\sem 2\\data structure\\github\\sophonedu-website\\sophonedu\\css\\admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{690E9079-0A63-4D65-A438-F1D107A620CB}|SophonEdu\\SophonEdu.csproj|solutionrelative:sophonedu\\css\\admin.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/D__SEM_2_DATA_STRUCTURE_GITHUB_SOPHONEDU_WEBSITE_SOPHONEDU_APP_DATA_SOPHONEDUSERVER.MDF/True/SqlTable/dbo.AdminData.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/D__SEM_2_DATA_STRUCTURE_GITHUB_SOPHONEDU_WEBSITE_SOPHONEDU_APP_DATA_SOPHONEDUSERVER.MDF/True/SqlTable/dbo.LearnersData.sql||{0058A1F7-65F3-4DB9-B3D0-CA7E64DD73CD}"
     }
   ],
@@ -36,78 +17,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "admin.css",
-              "DocumentMoniker": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\css\\admin.css",
-              "RelativeDocumentMoniker": "SophonEdu\\css\\admin.css",
-              "ToolTip": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\css\\admin.css",
-              "RelativeToolTip": "SophonEdu\\css\\admin.css",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2026-04-29T09:01:16.023Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "admin.aspx.cs",
-              "DocumentMoniker": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\pages\\admin.aspx.cs",
-              "RelativeDocumentMoniker": "SophonEdu\\pages\\admin.aspx.cs",
-              "ToolTip": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\pages\\admin.aspx.cs",
-              "RelativeToolTip": "SophonEdu\\pages\\admin.aspx.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-29T08:27:48.817Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "admin.aspx",
-              "DocumentMoniker": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\pages\\admin.aspx",
-              "RelativeDocumentMoniker": "SophonEdu\\pages\\admin.aspx",
-              "ToolTip": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\pages\\admin.aspx",
-              "RelativeToolTip": "SophonEdu\\pages\\admin.aspx",
-              "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-04-29T08:17:56.514Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "dbo.AdminData [Data]",
-              "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/D__SEM_2_DATA_STRUCTURE_GITHUB_SOPHONEDU_WEBSITE_SOPHONEDU_APP_DATA_SOPHONEDUSERVER.MDF/True/SqlTable/dbo.AdminData.sql",
-              "ToolTip": "dbo.AdminData [Data]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-04-29T08:17:48.634Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "admin.js",
-              "DocumentMoniker": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\js\\admin.js",
-              "RelativeDocumentMoniker": "SophonEdu\\js\\admin.js",
-              "ToolTip": "D:\\Sem 2\\Data Structure\\Github\\SophonEdu-Website\\SophonEdu\\js\\admin.js",
-              "RelativeToolTip": "SophonEdu\\js\\admin.js",
-              "ViewState": "AgIAAPAAAAAAAAAAAAAUwPoAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-04-29T03:42:10.355Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
               "Title": "dbo.LearnersData [Data]",
               "DocumentMoniker": "ViewDataWindow_MSSQL__/_LocalDB__MSSQLLocalDB/D__SEM_2_DATA_STRUCTURE_GITHUB_SOPHONEDU_WEBSITE_SOPHONEDU_APP_DATA_SOPHONEDUSERVER.MDF/True/SqlTable/dbo.LearnersData.sql",
               "ToolTip": "dbo.LearnersData [Data]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2026-04-29T09:06:52.174Z",
+              "WhenOpened": "2026-04-30T15:15:05.215Z",
               "EditorCaption": ""
             },
             {
@@ -120,7 +39,7 @@
               "RelativeToolTip": "SophonEdu\\index.aspx",
               "LogicalView": "7651a703-06e5-11d1-8ebd-00a0c90f26ea",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000195|",
-              "WhenOpened": "2026-04-28T14:21:50.66Z",
+              "WhenOpened": "2026-04-29T14:13:35.522Z",
               "EditorCaption": ""
             }
           ]
