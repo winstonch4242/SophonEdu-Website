@@ -1,7 +1,7 @@
-﻿// Sample user data
+// Sample user data — static defaults, overwritten by session on load
 const userData = {
-    name: 'John Doe',
-    email: 'john@example.com',
+    name: 'Student',
+    email: '',
     level: 'Foundation',
     xp: 1250,
     coursesCompleted: 3,
@@ -33,21 +33,25 @@ document.addEventListener('DOMContentLoaded', () => {
     animateProgressCircles();
 });
 
+// ✅ FIXED: Use ASP.NET session variable instead of localStorage
 function checkAuth() {
-    const currentUser = localStorage.getItem('currentUser');
-    if (!currentUser) {
+    if (typeof sessionEmail === 'undefined' || !sessionEmail) {
+        // Session expired or not set — redirect to login
         window.location.href = '../index.aspx';
+        return;
     }
 }
 
+// ✅ FIXED: Load user data from session variable
 function loadUserData() {
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) {
-        const user = JSON.parse(savedUser);
-        userData.name = user.name || userData.name;
-        userData.email = user.email || userData.email;
-        userData.level = user.level || userData.level;
-        userData.xp = user.xp || userData.xp;
+    if (typeof sessionEmail !== 'undefined' && sessionEmail) {
+        userData.email = sessionEmail;
+        // Derive a display name from email (e.g. "alice.tan@email.com" → "Alice Tan")
+        const emailPrefix = sessionEmail.split('@')[0]; // "alice.tan"
+        userData.name = emailPrefix
+            .split(/[._-]/)
+            .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+            .join(' '); // "Alice Tan"
     }
 
     // Update profile header
@@ -64,30 +68,21 @@ function loadUserData() {
     document.getElementById('coursesCompleted').textContent = userData.coursesCompleted;
     document.getElementById('currentStreak').textContent = userData.streak;
 
-    // Render achievements
     renderAchievements();
-
-    // Render activity
     renderActivity();
-
-    // Render courses
     renderCourses();
 }
 
 function setupEventListeners() {
-    // Mobile menu
     document.getElementById('hamburger')?.addEventListener('click', toggleMobileMenu);
 
-    // Edit profile
     document.getElementById('editProfileBtn')?.addEventListener('click', openEditProfile);
     document.getElementById('closeEditProfile')?.addEventListener('click', () => closeModal('editProfileModal'));
     document.getElementById('cancelEdit')?.addEventListener('click', () => closeModal('editProfileModal'));
     document.getElementById('editProfileForm')?.addEventListener('submit', handleProfileUpdate);
 
-    // Logout
     document.getElementById('logoutBtn')?.addEventListener('click', handleLogout);
 
-    // Scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
         if (window.scrollY > 50) {
@@ -168,40 +163,32 @@ function openEditProfile() {
     openModal('editProfileModal');
 }
 
+// ✅ FIXED: Removed localStorage — updates in-memory only
+// To persist changes, you'd need a server-side handler
 function handleProfileUpdate(e) {
     e.preventDefault();
 
     const newName = document.getElementById('editName').value.trim();
     const newEmail = document.getElementById('editEmail').value.trim();
-    const newPassword = document.getElementById('newPassword').value;
 
     if (!newName || !newEmail) {
         showToast('Please fill in all required fields', 'error');
         return;
     }
 
-    // Update user data
     userData.name = newName;
     userData.email = newEmail;
 
-    // Update localStorage
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    currentUser.name = newName;
-    currentUser.email = newEmail;
-    localStorage.setItem('currentUser', JSON.stringify(currentUser));
-
-    // Reload data
     loadUserData();
-
     closeModal('editProfileModal');
     showToast('Profile updated successfully!', 'success');
 }
 
+// ✅ FIXED: Redirect to logout.aspx to clear ASP.NET session
 function handleLogout() {
-    localStorage.removeItem('currentUser');
     showToast('Logged out successfully', 'success');
     setTimeout(() => {
-        window.location.href = '../index.aspx';
+        window.location.href = '../logout.aspx';
     }, 1000);
 }
 
