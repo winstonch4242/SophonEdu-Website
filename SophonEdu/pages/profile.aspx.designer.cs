@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SophonEdu
+namespace SophonEdu.pages
 {
 
 
