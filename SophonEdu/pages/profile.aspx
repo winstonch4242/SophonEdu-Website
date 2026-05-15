@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="SophonEdu.profile" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="profile.aspx.cs" Inherits="SophonEdu.pages.profile" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body>
+
+   <form id="form1" runat="server">
+    <asp:Label ID="lblUserEmail" runat="server" ClientIDMode="Static" Style="display:none;" />
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
@@ -148,7 +151,7 @@
         <div class="modal-content">
             <button class="modal-close" id="closeEditProfile">&times;</button>
             <h2>Edit Profile</h2>
-            <form id="editProfileForm">
+            <div id="editProfileForm">
                 <div class="form-group">
                     <label>Full Name</label>
                     <input type="text" id="editName" required>
@@ -169,7 +172,7 @@
                     <button type="button" class="btn-secondary" id="cancelEdit">Cancel</button>
                     <button type="submit" class="btn-primary">Save Changes</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -180,6 +183,8 @@
 
     <script src="../js/auth.js"></script>
     <script src="../js/profile.js"></script>
+
+  </form>
 </body>
 </html>
 

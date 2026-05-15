@@ -195,18 +195,44 @@
                             <p>Join thousands of students mastering programming skills</p>
                             <div id="registrationForm" class="registration-form" runat="server">
                                 <div class="form-row">
-                                    <input type="text" id="regName" placeholder="Full Name" required>
-                                    <input type="email" id="regEmail" placeholder="Email Address" required>
+                                    <asp:TextBox ID="regName" runat="server" CssClass="input" Placeholder="Full Name" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="regName"
+                                        ValidationGroup="RegisterGroup" ErrorMessage="Full name is required." />
+
+                                    <asp:TextBox ID="regEmail" runat="server" TextMode="Email" CssClass="input" Placeholder="Email Address" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="regEmail"
+                                        ValidationGroup="RegisterGroup" ErrorMessage="Email is required." />
+                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="regEmail"
+                                        ValidationGroup="RegisterGroup"
+                                        ValidationExpression="^[\w\.\-]+@[\w\-]+\.\w{2,}$"
+                                        ErrorMessage="Enter a valid email address." />
                                 </div>
                                 <div class="form-row">
-                                    <input type="password" id="regPassword" placeholder="Password (min 6 characters)" required>
-                                    <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required>
+                                    <asp:TextBox ID="regPassword" runat="server" TextMode="Password" CssClass="input" Placeholder="Password (min 6 characters)" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="regPassword"
+                                        ValidationGroup="RegisterGroup" ErrorMessage="Password is required." />
+                                    <asp:RegularExpressionValidator runat="server" ControlToValidate="regPassword"
+                                        ValidationGroup="RegisterGroup"
+                                        ValidationExpression=".{6,}"
+                                        ErrorMessage="Password must be at least 6 characters." />
+
+                                    <asp:TextBox ID="regConfirmPassword" runat="server" TextMode="Password" CssClass="input" Placeholder="Confirm Password" />
+                                    <asp:RequiredFieldValidator runat="server" ControlToValidate="regConfirmPassword"
+                                        ValidationGroup="RegisterGroup" ErrorMessage="Please confirm your password." />
+                                    <asp:CompareValidator runat="server"
+                                        ControlToValidate="regConfirmPassword"
+                                        ControlToCompare="regPassword"
+                                        ValidationGroup="RegisterGroup"
+                                        ErrorMessage="Passwords do not match." />
                                 </div>
                                 <div class="form-group-full">
-                                    <label style="color: var(--white); font-weight: 600; margin-bottom: 1rem; display: block;">Choose Your Learning Path:</label>
+                                    <label style="color: var(--white); font-weight: 600; margin-bottom: 1rem; display: block;">
+                                        Choose Your Learning Path:
+                                    </label>
                                     <div class="learning-path-options">
                                         <label class="path-option">
-                                            <input type="radio" name="learningPath" value="foundation" required>
+                                            <%-- required removed — validated by CustomValidator below --%>
+                                            <input type="radio" name="learningPath" value="foundation">
                                             <div class="path-card">
                                                 <span class="path-icon">🎯</span>
                                                 <h4>Foundation</h4>
@@ -214,7 +240,7 @@
                                             </div>
                                         </label>
                                         <label class="path-option">
-                                            <input type="radio" name="learningPath" value="diploma" required>
+                                            <input type="radio" name="learningPath" value="diploma">
                                             <div class="path-card">
                                                 <span class="path-icon">🚀</span>
                                                 <h4>Diploma</h4>
@@ -222,7 +248,7 @@
                                             </div>
                                         </label>
                                         <label class="path-option">
-                                            <input type="radio" name="learningPath" value="degree" required>
+                                            <input type="radio" name="learningPath" value="degree">
                                             <div class="path-card">
                                                 <span class="path-icon">🎓</span>
                                                 <h4>Degree</h4>
@@ -230,13 +256,24 @@
                                             </div>
                                         </label>
                                     </div>
+                                    <asp:CustomValidator runat="server"
+                                        ID="learningPathValidator"
+                                        ValidationGroup="RegisterGroup"
+                                        ClientValidationFunction="validateLearningPath"
+                                        ErrorMessage="Please choose a learning path." />
                                 </div>
-                                <button type="button" class="btn-large btn-primary">Create Account</button>
+
+                                <asp:Label ID="lblRegisterError" runat="server"
+                                    ForeColor="Red" Visible="false" />
+
+                                <asp:Button ID="btnRegister" runat="server" Text="Create Account"
+                                    CssClass="btn-large btn-primary"
+                                    OnClick="RegisterBtn_Click"
+                                    ValidationGroup="RegisterGroup" />
                             </div>
                         </div>
                     </div>
                 </section>
-            </section>
 
             <!-- Member Dashboard -->
             <section id="memberView" class="view-section">

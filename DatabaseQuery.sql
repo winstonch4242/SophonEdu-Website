@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[LearnersData] (
+CREATE TABLE [dbo].[LearnersData] (
     [LearnerID]    INT              IDENTITY (1, 1) NOT NULL,
     [FirstName]    NVARCHAR (50)    NOT NULL,
     [LastName]     NVARCHAR (50)    NOT NULL,
@@ -41,19 +41,25 @@ VALUES
 
 SELECT * FROM [AdminData];
 
+ALTER TABLE [CoursesData] ALTER COLUMN CourseDescription NVARCHAR(2000);
+
+INSERT INTO [CoursesData] (CourseName, TotalXP, ExpertiseLevel, CourseDescription, TotalDuration)
+VALUES
+('Fundamentals of Golang', 1500, 'Script Kiddie', 'Students will be introduced to the basics of Golang; they will gain a solid grasp on implementing condition flows, loops, and basic data structures in this course.', '5 Hours'),
+('Cryptographic Algorithms', 3500, 'Mastering the BASICs', 'Students will be able to understand the inner workings of common cryptographic algorithms, like AES-256 and MD5, including encryption, hashing, and secure key management.', '8 Hours'),
+('Working With SQL Database', 2000, 'Intermediate', 'Students will learn how to design, query, and manage relational databases using SQL, including joins, indexing, and data normalization techniques.', '7 Hours'),
+('LUA for Dummies', 1500, 'Script Kiddie', 'Students will learn the fundamentals of Lua scripting, including syntax, tables, functions, and basic scripting for applications and games.', '5 Hours'),
+('Data Structures & Algorithms', 2000, 'Intermediate', 'Students will explore essential data structures such as arrays, linked lists, stacks, and queues, along with fundamental algorithms for searching and sorting.', '6 Hours'),
+('Operating Systems Architecture', 3500, 'Mastering the BASICs', 'Students will gain an in-depth understanding of operating system design, including memory management, process scheduling, file systems, and system calls.', '9 Hours');
+
+SELECT * FROM [CoursesData];
+
 ALTER TABLE LearnersData ADD Salt UNIQUEIDENTIFIER DEFAULT NEWID();
 UPDATE LearnersData SET Salt = NEWID();
 ALTER TABLE LearnersData ADD PasswordHash VARBINARY(64);
 UPDATE LearnersData SET PasswordHash = HASHBYTES('SHA2_512', Password + CAST(Salt AS NVARCHAR(36))) WHERE PasswordHash IS NULL;
 DECLARE @Password NVARCHAR(50) = 'n3SOJ9A46ZmrVTCf';
 SELECT * FROM LearnersData WHERE PasswordHash = HASHBYTES('SHA2_512', @Password + CAST(Salt AS NVARCHAR(36)));
-
-ALTER TABLE LecturersData ADD Salt UNIQUEIDENTIFIER DEFAULT NEWID();
-UPDATE LecturersData SET Salt = NEWID();
-ALTER TABLE LecturersData ADD PasswordHash VARBINARY(64);
-UPDATE LecturersData SET PasswordHash = HASHBYTES('SHA2_512', Password + CAST(Salt AS NVARCHAR(36))) WHERE PasswordHash IS NULL;
-DECLARE @Password NVARCHAR(50) = 'B$8vL1*zR5@Xp';
-SELECT * FROM LecturersData WHERE PasswordHash = HASHBYTES('SHA2_512', @Password + CAST(Salt AS NVARCHAR(36)));
 
 UPDATE AdminData SET Password = 'La31tx8(g@1' WHERE AdminID = 1;
 UPDATE AdminData SET Password = 'Jl53a.S0=&k5' WHERE AdminID = 2;
@@ -108,3 +114,14 @@ CREATE TABLE [dbo].[CoursesData] (
     [TotalDuration]     NVARCHAR(50)     NOT NULL,
     PRIMARY KEY CLUSTERED ([CourseID] ASC)
 );
+
+SELECT * FROM [LessonsData];
+
+INSERT INTO [LessonsData] ([LessonName], [TotalXPUponCompletion], [ExpertiseLevel], [LessonDescription], [LessonDuration], [CourseID])
+VALUES
+('Getting Started with Go', 150, 'Script Kiddie', 'Set up your Go environment and write your first Go program, exploring the basic syntax and structure.', '30 minutes', 1),
+('Symmetric vs Asymmetric Encryption', 350, 'Mastering the BASICs', 'Understand the differences between symmetric and asymmetric encryption with real-world examples.', '50 minutes', 2),
+('Writing Your First SQL Queries', 200, 'Intermediate', 'Learn how to write SELECT, INSERT, UPDATE, and DELETE statements to manage data in a SQL database.', '45 minutes', 3),
+('Introduction to LUA Scripting', 150, 'Script Kiddie', 'Learn the fundamentals of LUA syntax, variables, and basic operations to start writing simple scripts.', '30 minutes', 4),
+('Stacks and Queues Explained', 200, 'Intermediate', 'Learn how stacks and queues work, their key operations, and how to implement them in code.', '60 minutes', 5),
+('Processes and Thread Management', 350, 'Mastering the BASICs', 'Explore how operating systems manage processes and threads, including scheduling and context switching.', '55 minutes', 6);
